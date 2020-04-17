@@ -24,7 +24,7 @@ public class LogAImp {
     @Pointcut("")
     public void pointCut(){}
 
-    @Before("@annotation(com.boot.bootdemo.aspect.LogA)")
+    @Before("@annotation(LogA)")
     public void beforeMethod(JoinPoint joinpoint){
         Signature signature = joinpoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
@@ -32,6 +32,5 @@ public class LogAImp {
         LogA logA = method.getAnnotation(LogA.class);
         Object[] args = joinpoint.getArgs();
         System.out.println(logA.action()+"___________________****"+logA.title()+"&&&&&&&-----"+JSON.toJSONString(args));
-
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogAspect {
-   // @Before("execution(* com.wuychn.springbootaspect.controller.*.*(..))") // 所有controller包下面的所有方法的所有参数
+   // @Before("execution(* com.wuychn.springbootaspect.controller.*.*(..))") // 所有controller包下面的 所有方法的所有参数
 
     @Before("execution(void com.boot.bootdemo.login.Login.*(int))")
     public void beforeMethod(JoinPoint joinpoint){

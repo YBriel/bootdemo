@@ -28,7 +28,7 @@ public class SameUrlDataInterceptor extends HandlerInterceptorAdapter {
 
   private static Logger LOG = LoggerFactory.getLogger(SameUrlDataInterceptor.class);
 
-  private static ConcurrentHashMap<String,Object> mapp=new ConcurrentHashMap<String,Object>();
+  private static ConcurrentHashMap<String,Object> mapp= new ConcurrentHashMap<>();
 
   /**
    * 是否阻止提交,fasle阻止,true放行

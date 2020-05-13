@@ -4,6 +4,7 @@ import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.service.StudentService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -27,5 +28,11 @@ public class StudentController {
         student.setName(name);
         boolean save = studentService.save(student);
         System.out.println("最后的"+student.getId());
+    }
+
+    @RequestMapping("/testParam")
+    public String testParam(@RequestParam(value = "id",required = false)String id,@RequestParam(value = "name",required = true)String name){
+        System.out.println("请求进来了:"+id+name);
+        return name;
     }
 }

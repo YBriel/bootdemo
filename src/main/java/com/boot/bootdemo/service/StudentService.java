@@ -10,5 +10,5 @@ import com.boot.bootdemo.entity.Student;
  */
 public interface StudentService extends IService<Student> {
 
-
+    Student queryStu();
 }

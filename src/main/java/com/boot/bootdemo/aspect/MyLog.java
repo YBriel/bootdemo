@@ -10,12 +10,12 @@ import java.lang.annotation.Target;
  * Description:
  * Date: 2020/2/8   11:41
  */
-@Target({ElementType.METHOD,ElementType.PARAMETER,ElementType.FIELD})
+@Target({ElementType.FIELD,ElementType.TYPE,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogA {
+public @interface MyLog {
 
-    String title() default "";
+    String user() default "";
 
-    String action() default "";
+    String msg() default "";
 
 }

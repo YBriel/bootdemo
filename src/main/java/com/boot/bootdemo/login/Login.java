@@ -1,6 +1,7 @@
 package com.boot.bootdemo.login;
 
 import com.boot.bootdemo.aspect.LogA;
+import com.boot.bootdemo.entity.LoginBean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Login {
-
+    @LogA(title = "hhh",action = "登录")
     public void login(){
         System.out.println("登录成功");
     }
@@ -24,7 +25,10 @@ public class Login {
     }
 
     @LogA(title = "hhh",action = "登录")
-    public void login(String  a,int b,String c){
-        System.out.println("登录成功11111"+a);
+    public void login(@LogA  LoginBean bean){
+
+        System.out.println("登录成功11111");
+        System.out.println("---------------"+ bean);
     }
+
 }

@@ -33,7 +33,7 @@ public class TestAspect {
     @Test
     public void login(){
        // Login login=new Login();
-        login.login("s",1,"d");
+
         System.out.println("---");
     }
 

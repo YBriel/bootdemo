@@ -3,6 +3,7 @@ package com.boot.bootdemo;
 import org.junit.Test;
 import org.redisson.Redisson;
 import org.redisson.api.*;
+import org.redisson.client.codec.StringCodec;
 import org.redisson.config.Config;
 
 import java.util.List;
@@ -39,27 +40,28 @@ public class RedisTest {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://39.106.121.52:6379");
         RedissonClient redisson = Redisson.create(config);
-        RGeo<String> geo = redisson.getGeo("geo");
-        geo.add(new GeoEntry(115.861166,28.742931,"shuanggang"));
-       // geo.add(new GeoEntry(115.886572,28.75008,"baishuihu"));
-       // geo.add(new GeoEntry(115.85224,28.684065,"ditie"));
-        geo.add(new GeoEntry(115.855556,28.743952,"caida"));
-        geo.add(new GeoEntry(115.877357,28.742823,"ligong"));
-        geo.add(new GeoEntry(115.817103,28.739738,"linkeyuan"));
+        RGeo<String> geo2 = redisson.getGeo("geo2", StringCodec.INSTANCE);
+        geo2.add(115.861166,28.742931,"shuanggang");
+       // geo.add(115.886572,28.75008,"baishuihu"));
+       // geo.add(115.85224,28.684065,"ditie"));
+        geo2.add(115.855556,28.743952,"caida");
+        geo2.add(115.877357,28.742823,"ligong");
+        geo2.add(115.817103,28.739738,"linkeyuan");
+
        // geo.add(new GeoEntry(115.785549,28.650552,"yongyou"));
      /*   geo.add(new GeoEntry(115.925539,28.634658,"hongdu"));
         geo.add(new GeoEntry(115.838936,28.741351,"nantian"));*/
-        geo.add(new GeoEntry(115.888515,28.745457,"posit"));
-        geo.add(new GeoEntry(115.812984,28.744855,"far"));
-        Map<String, GeoPosition> stringGeoPositionMap = geo.radiusWithPosition(115.85224,28.684065, 3, GeoUnit.KILOMETERS, 5);
-        Map<String, GeoPosition> stringGeoPositionMap1 = geo.radiusWithPosition(115.85224,28.684065, 5, GeoUnit.KILOMETERS, 5);
-        Map<String, GeoPosition> stringGeoPositionMap2= geo.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.ASC, 5);
-        Map<String, GeoPosition> stringGeoPositionMap3= geo.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.DESC, 5);
+        geo2.add(115.888515,28.745457,"posit");
+        geo2.add(115.812984,28.744855,"far");
+        Map<String, GeoPosition> stringGeoPositionMap = geo2.radiusWithPosition(115.85224,28.684065, 3, GeoUnit.KILOMETERS, 5);
+        Map<String, GeoPosition> stringGeoPositionMap1 = geo2.radiusWithPosition(115.85224,28.684065, 5, GeoUnit.KILOMETERS, 5);
+        Map<String, GeoPosition> stringGeoPositionMap2= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.ASC, 5);
+        Map<String, GeoPosition> stringGeoPositionMap3= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.DESC, 5);
         //Map<String, GeoPosition> stringGeoPositionMap3= geo.radiusW(115.85224,28.684065, 9, GeoUnit.KILOMETERS, 5);
        stringGeoPositionMap2.forEach((k,v)-> System.out.println("key : " + k + "; value : " + v.getLatitude()));
        stringGeoPositionMap3.forEach((k,v)-> System.out.println("key : " + k + "; value : " + v.getLatitude()));
 
-        stringGeoPositionMap2.forEach((k,v)-> System.out.println(k+"---"+"距离是："+geo.dist("posit",k,GeoUnit.METERS)));
+        stringGeoPositionMap2.forEach((k,v)-> System.out.println(k+"---"+"距离是："+geo2.dist("posit",k,GeoUnit.METERS)));
        // stringGeoPositionMap2.entrySet().stream().forEach((k,v)-> System.out.println(geo.dist()));
         //geo.radiusStoreSortedTo()
         redisson.shutdown();

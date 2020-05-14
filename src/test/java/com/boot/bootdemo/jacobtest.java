@@ -1,15 +1,18 @@
+/*
 package com.boot.bootdemo;
 
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
 
+*/
 /**
  * 文字转语音测试 jdk bin文件中需要导入jacob-1.17-M2-x64.dll
  *
  * @author zk
  * @date: 2019年6月25日 上午10:05:21
- */
+ *//*
+
 public class jacobtest {
 
 
@@ -17,11 +20,13 @@ public class jacobtest {
         jacobtest.textToSpeech("支付宝到账10000元");
     }
 
-    /**
+    */
+/**
      * 语音转文字并播放
      *
      * @param txt
-     */
+     *//*
+
     public static void textToSpeech(String text) {
         ActiveXComponent ax = null;
         try {
@@ -72,4 +77,4 @@ public class jacobtest {
             e.printStackTrace();
         }
     }
-}
+}*/

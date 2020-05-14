@@ -57,4 +57,22 @@ public class StudentController {
         return studentService.remove(studentQueryWrapper);
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
+
+    @RequestMapping("/insertStu")
+    public boolean insertStu(int id){
+        Student stu=new Student(id,"lao",23);
+        return studentService.saveOrUpdate(stu);
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+    }
+
+    @RequestMapping("/updateStu")
+    public boolean updateStu(int id){
+        Student byId = studentService.getById(id);
+        if(byId!=null){
+            byId.setName("ttt");
+            return studentService.saveOrUpdate(byId);
+        }
+        return false;
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+    }
 }

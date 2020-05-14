@@ -103,7 +103,7 @@ public class RedisTest {
         Student region;
         String regionStr = bucket.get();
         if(StringUtils.isEmpty(regionStr)){
-            region  = new Student(111,"tim",222,new Date(),new Date(),1);
+            region  = new Student(111,"tim",222);
             bucket.set(JSONObject.toJSONString(region));
         }else {
             region = JSONObject.parseObject(regionStr, Student.class);

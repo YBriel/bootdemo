@@ -1,5 +1,7 @@
 package com.boot.bootdemo.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.service.StudentService;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Author： yuzq
@@ -34,5 +37,24 @@ public class StudentController {
     public String testParam(@RequestParam(value = "id",required = false)String id,@RequestParam(value = "name",required = true)String name){
         System.out.println("请求进来了:"+id+name);
         return name;
+    }
+
+    @RequestMapping("/testLambda")
+    public List<Student> testLambda(){
+        List<Student> list1 = studentService.list();
+        List<Student> list = studentService.list(new LambdaQueryWrapper<>(new Student()).select(Student::getId, Student::getName));
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+        return list;
+    }
+
+    @RequestMapping("/deleteStu")
+    public boolean deleteStu(int id){
+        List<Student> list = studentService.list();
+        Student byId = studentService.getById(id);
+        QueryWrapper<Student> studentQueryWrapper=new QueryWrapper<>();
+        studentQueryWrapper.eq("id",id);
+        Student one = studentService.getOne(studentQueryWrapper);
+        return studentService.remove(studentQueryWrapper);
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
 }

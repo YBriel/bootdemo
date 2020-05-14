@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Version: 1.0
  * @create 2019/3/26 10:35
  */
-@Component
+//@Component
 public class SameUrlDataInterceptor extends HandlerInterceptorAdapter {
 
   private static Logger LOG = LoggerFactory.getLogger(SameUrlDataInterceptor.class);

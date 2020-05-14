@@ -1,11 +1,15 @@
 package com.boot.bootdemo;
 
+import com.alibaba.fastjson.JSONObject;
+import com.boot.bootdemo.entity.Student;
 import org.junit.Test;
 import org.redisson.Redisson;
 import org.redisson.api.*;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.config.Config;
+import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,8 +59,8 @@ public class RedisTest {
         geo2.add(115.812984,28.744855,"far");
         Map<String, GeoPosition> stringGeoPositionMap = geo2.radiusWithPosition(115.85224,28.684065, 3, GeoUnit.KILOMETERS, 5);
         Map<String, GeoPosition> stringGeoPositionMap1 = geo2.radiusWithPosition(115.85224,28.684065, 5, GeoUnit.KILOMETERS, 5);
-        Map<String, GeoPosition> stringGeoPositionMap2= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.ASC, 5);
-        Map<String, GeoPosition> stringGeoPositionMap3= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.DESC, 5);
+        Map<String, GeoPosition> stringGeoPositionMap2= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.ASC, 3);
+        Map<String, GeoPosition> stringGeoPositionMap3= geo2.radiusWithPosition(115.888515,28.745457, 9, GeoUnit.KILOMETERS,GeoOrder.DESC, 3);
         //Map<String, GeoPosition> stringGeoPositionMap3= geo.radiusW(115.85224,28.684065, 9, GeoUnit.KILOMETERS, 5);
        stringGeoPositionMap2.forEach((k,v)-> System.out.println("key : " + k + "; value : " + v.getLatitude()));
        stringGeoPositionMap3.forEach((k,v)-> System.out.println("key : " + k + "; value : " + v.getLatitude()));
@@ -87,5 +91,24 @@ public class RedisTest {
         List<String> cities = geo.radius(15, 37, 200, GeoUnit.KILOMETERS);
         Map<String, GeoPosition> citiesWithPositions = geo.radiusWithPosition(15, 37, 200, GeoUnit.KILOMETERS);
         redisson.shutdown();
+    }
+
+
+    @Test
+    public void testdemo3(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://39.106.121.52:6379");
+        RedissonClient redissonClient = Redisson.create(config);
+        RBucket<String> bucket = redissonClient.getBucket("upload-gps-360100" , StringCodec.INSTANCE);
+        Student region;
+        String regionStr = bucket.get();
+        if(StringUtils.isEmpty(regionStr)){
+            region  = new Student(111,"tim",222,new Date(),new Date(),1);
+            bucket.set(JSONObject.toJSONString(region));
+        }else {
+            region = JSONObject.parseObject(regionStr, Student.class);
+        }
+        System.out.println(region);
+        redissonClient.shutdown();
     }
 }

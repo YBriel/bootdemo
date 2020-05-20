@@ -1,6 +1,7 @@
 package com.boot.bootdemo;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 /**
  * Author： yuzq
@@ -10,6 +11,7 @@ import redis.clients.jedis.Jedis;
 public class JedisTest {
 
     public static void main(String[] args) {
+        JedisPool jedisPool=new JedisPool();
         Jedis jedis=new Jedis("39.106.121.52");
         jedis.auth("mz666");
    /*     for (int i = 100; i >=1; i--) {

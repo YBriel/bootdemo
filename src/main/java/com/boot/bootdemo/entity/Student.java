@@ -32,9 +32,11 @@ public class Student extends BaseEntity<Student>{
     @Dict(dictName = "stu" ,dictKey = "age")
     private int age;
 
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
-
-
-   // private String ageStr;
+    // private String ageStr;
 
 }

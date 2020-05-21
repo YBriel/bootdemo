@@ -4,13 +4,25 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.entity.Student;
+import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.StudentService;
+import org.apache.ibatis.executor.result.DefaultMapResultHandler;
+import org.apache.ibatis.executor.result.DefaultResultHandler;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Author： yuzq
@@ -22,6 +34,13 @@ public class StudentController {
 
     @Resource
     private StudentService studentService;
+
+    @Resource
+    private StudentMapper studentMapper;
+    @Resource
+    private SqlSession sqlSession;
+
+    private  ExecutorService executorService=Executors.newFixedThreadPool(5);;
 
     @RequestMapping("/testStu")
     @SameUrlData
@@ -35,16 +54,34 @@ public class StudentController {
 
     @RequestMapping("/testParam")
     public String testParam(@RequestParam(value = "id",required = false)String id,@RequestParam(value = "name",required = true)String name){
+      //  ExecutorService executorService=Executors.newCachedThreadPool();
+        boolean shutdown0 = executorService.isShutdown();
+        System.out.println("是否关闭---"+shutdown0);
+         //executorService= Executors.newSingleThreadExecutor();
+        executorService.execute(()->{
+            System.out.println("哈哈哈;");
+            System.out.println(Thread.currentThread().getName()+Thread.currentThread().getId()+"在运行");
+        });
+        boolean shutdown = executorService.isShutdown();
+        System.out.println("是否关闭---"+shutdown);
+        Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+        System.out.println("Thread.getAllStackTraces()---"+allStackTraces.size());
         System.out.println("请求进来了:"+id+name);
+        //executorService.shutdown();
+        boolean shutdown2 = executorService.isShutdown();
+        System.out.println("是否关闭---"+shutdown2);
+        System.out.println(executorService);
         return name;
     }
 
     @RequestMapping("/testLambda")
     public List<Student> testLambda(){
+        //boolean shutdown = executorService.isShutdown();
+        //System.out.println("是否关闭---"+shutdown);
         List<Student> list1 = studentService.list();
         List<Student> list = studentService.list(new LambdaQueryWrapper<>(new Student()).select(Student::getId, Student::getName));
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
-        return list;
+        return list1;
     }
 
     @RequestMapping("/deleteStu")
@@ -58,9 +95,21 @@ public class StudentController {
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
 
+    @RequestMapping("/getStu")
+    public boolean getStu(int id){
+        QueryWrapper<Student> studentQueryWrapper=new QueryWrapper<>();
+        studentQueryWrapper.eq("id",id);
+        Student one = studentService.getOne(studentQueryWrapper);
+        QueryWrapper<Student> studentQueryWrapper1r=new QueryWrapper<>();
+        studentQueryWrapper1r.eq("id",id);
+        Student www = studentService.getOne(studentQueryWrapper);
+        return one==null;
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+    }
+
     @RequestMapping("/insertStu")
     public boolean insertStu(int id){
-        Student stu=new Student(id,"lao",23);
+        Student stu=new Student("lao",23);
         return studentService.saveOrUpdate(stu);
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
@@ -75,4 +124,26 @@ public class StudentController {
         return false;
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
+
+    @RequestMapping("/mapperSelect")
+    public boolean mapperSelect(int id) throws SQLException {
+
+        Connection connection = sqlSession.getConnection();
+     /*   PreparedStatement preparedStatement = connection.prepareStatement("select  * from student where id=" + id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSet resultSet1 = preparedStatement.executeQuery();
+        ResultSet resultSet2 = preparedStatement.executeQuery();*/
+        List<Student> objects = sqlSession.selectList("select * from student");
+        sqlSession.select("select * from student where id="+id, new DefaultResultHandler());
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+        //SqlSession sqlSession
+      /*  Student query1 = mapper.query(id);
+        Student query11 = mapper.query(id);
+        Student query22 = mapper.query(id);
+        Student query31 = mapper.query(id);*/
+        return true;
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+    }
+
+
 }

@@ -81,7 +81,7 @@
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
-			<artifactId>jedisw</artifactId>
+			<artifactId>jedis</artifactId>
 		</dependency>
 		<!--<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -136,6 +136,7 @@
 			<artifactId>redisson</artifactId>
 			<version>3.12.5</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>

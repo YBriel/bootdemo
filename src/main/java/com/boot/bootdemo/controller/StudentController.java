@@ -145,5 +145,10 @@ public class StudentController {
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
 
-
+    @RequestMapping("/getStuLambda")
+    public List<Student> getStuLambda(int id){
+        List<Student> list = studentService.list(new LambdaQueryWrapper<Student>().gt(Student::getId, 1));
+        return list;
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+    }
 }

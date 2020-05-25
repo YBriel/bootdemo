@@ -151,4 +151,26 @@ public class StudentController {
         return list;
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
+
+    @RequestMapping("/testLambda11")
+    public int testLambda11() throws InterruptedException {
+        for (int i = 0; i < 2850; i++) {
+            new Thread(() -> {
+                try {
+                    System.out.println(Thread.currentThread().getName()+ " will sleep");
+                    Thread.sleep(5000);
+                    QueryWrapper<Student> studentQueryWrapper=new QueryWrapper<>();
+                    studentQueryWrapper.eq("id",Math.random());
+                    Student one = studentService.getOne(studentQueryWrapper);
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }, String.valueOf(i)).start();
+        }
+        Thread.sleep(20000);
+
+        //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
+        return 1;
+    }
 }

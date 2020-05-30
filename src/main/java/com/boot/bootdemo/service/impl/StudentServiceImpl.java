@@ -19,10 +19,11 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
 
     @Override
-    @Dict
+    @Dict(dictKey = "keyyy" ,dictName = "dictnamemm")
     public Student queryStu() {
         Student student=new Student();
         student.setAge(888);
+        student.setName("哈哈哈");
         System.out.println("初始前"+ JSON.toJSONString(student));
         return student;
     }

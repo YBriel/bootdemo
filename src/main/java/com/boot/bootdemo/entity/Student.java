@@ -23,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Student extends BaseEntity<Student>{
 
-    @Dict(dictName = "stu" ,dictKey = "id")
+    //@Dict(dictName = "stu" ,dictKey = "id")
     private int id;
 
     @Dict(dictName = "stu" ,dictKey = "name")
@@ -32,7 +32,16 @@ public class Student extends BaseEntity<Student>{
     @Dict(dictName = "stu" ,dictKey = "age")
     private int age;
 
+    private String nameStr;
+
+    private String ageStr;
+
     public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public Student(int a,String name, int age) {
         this.name = name;
         this.age = age;
     }

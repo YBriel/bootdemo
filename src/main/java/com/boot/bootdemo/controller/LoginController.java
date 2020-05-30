@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Writer;
 
 /**
  * Author： yuzq
@@ -22,13 +23,20 @@ public class LoginController extends BaseController{
     private Login login;
 
     @RequestMapping("/login")
-    public void login(){
+    public void login(@RequestBody String body){
+        System.out.println(body);
+        login.login();
+    }
+
+    @RequestMapping("/testHeader")
+    public void testHeaderDe(HttpServletRequest request,HttpServletResponse response){
+        System.out.println(request);
         login.login();
     }
 
     @RequestMapping("/filter")
     @ResponseBody
-    public String filterTest(){
+    public String filterTest(Writer writer){
             return "hello";
     }
 

@@ -2,6 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
@@ -172,5 +173,11 @@ public class StudentController {
 
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
         return 1;
+    }
+
+    @RequestMapping("/testStudentDict")
+    public Student query(){
+        Student student = studentService.queryStu();
+        return student;
     }
 }

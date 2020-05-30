@@ -7,10 +7,17 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.redisson.client.RedisClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Author： yuzq
@@ -30,7 +37,6 @@ public class DictImp {
     public void beforeClass(JoinPoint joinPoint){}
 
 
-
     @Before("@annotation(com.boot.bootdemo.aspect.Dict)")
     public void beforeMethod(JoinPoint joinpoint) {
 
@@ -46,16 +52,34 @@ public class DictImp {
 
     @AfterReturning(value = "@annotation(com.boot.bootdemo.aspect.Dict)",returning = "obj")
     public void afterMethod(JoinPoint joinpoint,Object obj) throws IllegalAccessException {
+        Map<String,Integer> map=new LinkedHashMap<>();
         if(obj.getClass().getAnnotation(Dict.class)!=null){
             Field[] declaredFields = obj.getClass().getDeclaredFields();
+            for (int i=0;i<declaredFields.length;i++) {
+                Field declaredField = declaredFields[i];
+                map.put(declaredField.getName(),i);
+            }
             for (Field declaredField : declaredFields) {
                 if(declaredField.getAnnotation(Dict.class)!=null){
+                    Dict annotation = declaredField.getAnnotation(Dict.class);
+                    String s = annotation.dictKey();
+                    String s1 = annotation.dictName();
                     declaredField.setAccessible(true);
-                    declaredField.setInt(obj,456);
+                    Object o = declaredField.get(obj);
+                    String s3 = declaredField.getName() + "Str";
+                    Integer integer = map.get(s3);
+                    Field declaredField1 = declaredFields[integer];
+                    Jedis jedis=new Jedis("39.106.121.52");
+                    jedis.auth("mz666");
+                    String s2 = jedis.get(s1 + ":" + s);
+                    declaredField1.setAccessible(true);
+                    declaredField1.set(obj, String.valueOf(s2));
+                    // declaredField.setAccessible(true);
+                    //String s2 = declaredField.getName() + "Str";
+                   // declaredField.setInt(obj,456);
                 }
             }
         }
         System.out.println("处理后"+obj);
     }
-
 }

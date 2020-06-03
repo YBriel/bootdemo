@@ -1,5 +1,7 @@
 package com.boot.bootdemo.aspect;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -15,6 +17,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -69,17 +72,17 @@ public class DictImp {
                     String s3 = declaredField.getName() + "Str";
                     Integer integer = map.get(s3);
                     Field declaredField1 = declaredFields[integer];
-                    Jedis jedis=new Jedis("39.106.121.52");
-                    jedis.auth("mz666");
-                    String s2 = jedis.get(s1 + ":" + s);
+                    Jedis jedis=new Jedis("39.107.138.128");
+                    jedis.auth("123456");
+                    String s4 = "dict:"+s1 + ":" + s + ":" + o.toString();
+                    System.out.println("需要从redis获取的"+s4);
+                    String s2 = jedis.get(s4);
+                    System.out.println("redis获取的"+s2);
                     declaredField1.setAccessible(true);
                     declaredField1.set(obj, String.valueOf(s2));
-                    // declaredField.setAccessible(true);
-                    //String s2 = declaredField.getName() + "Str";
-                   // declaredField.setInt(obj,456);
                 }
             }
         }
-        System.out.println("处理后"+obj);
+        //System.out.println("处理后"+obj);
     }
 }

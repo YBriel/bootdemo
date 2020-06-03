@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.SameUrlData;
+import com.boot.bootdemo.config.MyResult;
+import com.boot.bootdemo.config.MyResultUtil;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.StudentService;
@@ -176,8 +178,14 @@ public class StudentController {
     }
 
     @RequestMapping("/testStudentDict")
-    public Student query(){
-        Student student = studentService.queryStu();
+    public Student query(String name,Integer age){
+        Student student = studentService.queryStu(name,age);
         return student;
+    }
+
+    @RequestMapping("/queryStu")
+    public MyResult<Student> queryStu(String name, Integer age){
+        Student student = studentService.queryStu(name,age);
+        return MyResultUtil.succ(student);
     }
 }

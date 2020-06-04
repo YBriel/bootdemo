@@ -19,6 +19,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
 
 
     @Override
+    @Dict
     public Student queryStu(String name,Integer age) {
         Student student=new Student();
         student.setAge(age);

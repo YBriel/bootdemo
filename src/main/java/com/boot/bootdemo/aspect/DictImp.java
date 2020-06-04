@@ -40,7 +40,7 @@ public class DictImp {
     public void beforeClass(JoinPoint joinPoint){}
 
 
-    @Before("@annotation(com.boot.bootdemo.aspect.Dict)")
+/*    @Before("@annotation(com.boot.bootdemo.aspect.Dict)")
     public void beforeMethod(JoinPoint joinpoint) {
 
         Signature signature = joinpoint.getSignature();
@@ -50,7 +50,7 @@ public class DictImp {
 
         }
 
-    }
+    }*/
 
 
     @AfterReturning(value = "@annotation(com.boot.bootdemo.aspect.Dict)",returning = "obj")

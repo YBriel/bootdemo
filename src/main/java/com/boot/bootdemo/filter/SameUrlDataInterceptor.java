@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.boot.bootdemo.aspect.SameUrlData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -17,11 +16,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Title: 防止用户重复提交数据拦截器
- * @Description: 将用户访问的url和参数结合token存入redis，每次访问进行验证是否重复请求接口
- * @Auther: xhq
- * @Version: 1.0
- * @create 2019/3/26 10:35
+ * Title: 防止用户重复提交数据拦截器
+ * Description: 将用户访问的url和参数结合token存入redis，每次访问进行验证是否重复请求接口
  */
 //@Component
 public class SameUrlDataInterceptor extends HandlerInterceptorAdapter {

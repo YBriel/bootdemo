@@ -10,7 +10,6 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,16 +47,16 @@ public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
-        interceptor.addPathPatterns("/**");
-        List<String> ex=new ArrayList<>();
-        ex.add("/bootdemo/**/*");
-        ex.add("/filter");
+       // InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
+       // interceptor.addPathPatterns("/**");
+        //List<String> ex=new ArrayList<>();
+       // ex.add("/bootdemo/**/*");
+       // ex.add("/filter");
 //        ex.add("/bootdemo/testStu");
 //        ex.add("/testStu");
   //      ex.add("/testStu/**");
 //        ex.add("/testStu/**/*");
-        interceptor.excludePathPatterns(ex);
+       // interceptor.excludePathPatterns(ex);
         //registry.addInterceptor(new SameUrlDataInterceptor());
     }
 

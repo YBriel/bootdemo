@@ -1,15 +1,9 @@
 package com.boot.bootdemo.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.boot.bootdemo.aspect.Dict;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 /**
  * Author： yuzq
@@ -46,6 +40,10 @@ public class Student extends BaseEntity<Student>{
         this.age = age;
     }
 
+    public static void main(String[] args) {
+        Student student=new Student();
+        //student.selectById()
+    }
     // private String ageStr;
 
 }

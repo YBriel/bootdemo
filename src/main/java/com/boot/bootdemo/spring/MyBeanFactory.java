@@ -12,10 +12,10 @@ import java.util.Iterator;
  * create: 2020-05-30 13:29
  **/
 //@Component
-public class MyBeanFactory implements BeanFactoryPostProcessor {
+/*public class MyBeanFactory implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         Iterator<String> beanNamesIterator = beanFactory.getBeanNamesIterator();
         System.out.println(beanNamesIterator.next());
     }
-}
+}*/

@@ -11,7 +11,7 @@
 <div><p id="message">hello world!</p></div>
 <button id="connect" onClick='connect()'/>Connect</button>
 <button id="disconnect" onClick='disconnect()'>Disconnect</button>
-<button id="send" onClick='send()'/>Send Message</button>
+<button id="send" onclick='send()'/>Send Message</button>
 </body>
 <script type="text/javascript">
 
@@ -20,7 +20,7 @@
      * 前端js的 socket.on("事件名",匿名函数(服务器向客户端发送的数据))为监听服务器端的事件
      **/
         //  var socket = io.connect("http://192.168.1.1:8089");
-   var socket = io.connect("http://localhost:9002");
+   var socket = io.connect("http://localhost:8080");
     var firstconnect = true;
 
     function connect() {
@@ -42,6 +42,7 @@
     socket.on('disconnect', function(){ status_update("Disconnected from Server"); });
     //监听服务器端发送消息事件
     socket.on('messageevent', function(data) {
+        console.log("messageevent方法");
         message(data)
         //console.log("服务器发送的消息是："+data);
     });
@@ -52,10 +53,12 @@
     }
 
     function message(data) {
+        console.log("message方法");
         document.getElementById('message').innerHTML = "Server says: " + data;
     }
 
     function status_update(txt){
+        console.log("status_update方法");
         document.getElementById('status').innerHTML = txt;
     }
 
@@ -65,6 +68,7 @@
     //点击发送消息触发
     function send() {
         //console.log("点击了发送消息，开始向服务器发送消息")
+        console.log("点击发送消息send方法");
         var msg = "我很好的,是的．";
         socket.emit('messageevent', {msgContent: msg});
     };

@@ -6,6 +6,7 @@ import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.config.MyResult;
 import com.boot.bootdemo.config.MyResultUtil;
+import com.boot.bootdemo.entity.MyStudentEntity;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.StudentService;
@@ -112,8 +113,8 @@ public class StudentController {
 
     @RequestMapping("/insertStu")
     public boolean insertStu(int id){
-        Student stu=new Student("lao",23);
-        return studentService.saveOrUpdate(stu);
+        MyStudentEntity stu=new MyStudentEntity(id,"tom",33);
+        return stu.insert();
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
 

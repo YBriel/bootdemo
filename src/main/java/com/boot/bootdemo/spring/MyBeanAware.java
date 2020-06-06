@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ViewResolver;
  * author: yuzq beanPostProcessor 实例级别的后置处理器
  * create: 2020-05-30 12:51
  **/
-@Component
+//@Component
 public class MyBeanAware implements BeanPostProcessor {
 
     @Override

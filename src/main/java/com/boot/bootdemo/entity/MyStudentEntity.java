@@ -20,6 +20,14 @@ public class MyStudentEntity extends Model<MyStudentEntity> {
 
     private int age;
 
+    public MyStudentEntity() {
+    }
+
+    public MyStudentEntity(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
     public MyStudentEntity queryStudentById(int id){
        return selectById(id);

@@ -13,7 +13,7 @@ import org.springframework.core.ResolvableType;
  * @author: xgs
  * @date: 2020/5/28 18:55
  */
-public class MyBeanFactoryDemo1 extends AbstractBeanFactory {
+/*public class MyBeanFactoryDemo1 extends AbstractBeanFactory {
     @Override
     protected boolean containsBeanDefinition(String s) {
         return false;
@@ -48,4 +48,4 @@ public class MyBeanFactoryDemo1 extends AbstractBeanFactory {
     public <T> ObjectProvider<T> getBeanProvider(ResolvableType resolvableType) {
         return null;
     }
-}
+}*/

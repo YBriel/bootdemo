@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@Dict
-@AllArgsConstructor
 @NoArgsConstructor
 public class Student extends BaseEntity<Student>{
 
@@ -26,9 +24,9 @@ public class Student extends BaseEntity<Student>{
     @Dict(dictName = "stu" ,dictKey = "age")
     private int age;
 
-    private String nameStr;
+/*    private String nameStr;
 
-    private String ageStr;
+    private String ageStr;*/
 
     public Student(String name, int age) {
         this.name = name;

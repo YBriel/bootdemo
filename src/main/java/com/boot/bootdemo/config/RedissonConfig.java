@@ -18,6 +18,7 @@ public class RedissonConfig {
     public RedissonClient red() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://39.106.121.52:6379");
+        config.useSingleServer().setPassword("mz666");
         return Redisson.create(config);
     }
 }

@@ -7,6 +7,11 @@ import com.boot.bootdemo.listener.StudentAddEvent;
 import com.boot.bootdemo.login.Login;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.redisson.Redisson;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.Codec;
+import org.redisson.client.codec.StringCodec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -31,6 +36,9 @@ public class TestAspect {
     @Autowired
     private Login login;
 
+    @Autowired
+    private RedissonClient redisson;
+
     @Test
     public void login(){
        // Login login=new Login();
@@ -53,7 +61,9 @@ public class TestAspect {
 
     @Test
     public void test(){
+        RBucket<Object> test = redisson.getBucket("test", StringCodec.INSTANCE);
 
+        //System.out.println(test.get());
     }
 
 

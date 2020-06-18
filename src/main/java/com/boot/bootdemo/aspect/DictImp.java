@@ -3,6 +3,7 @@ package com.boot.bootdemo.aspect;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,7 +38,7 @@ public class DictImp {
     public void pointCut(){}
 
 
-    public void beforeClass(JoinPoint joinPoint){}
+    public void beforeClass(JoinPoint joinPoint, ProceedingJoinPoint pd){}
 
 
 /*    @Before("@annotation(com.boot.bootdemo.aspect.Dict)")

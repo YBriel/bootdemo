@@ -32,6 +32,10 @@ public class RedissonController {
                 this.common(2);
             }, String.valueOf(i)).start();
         }
+
+        for (int i = 0; i < 10; i++) {
+            new Thread(this::commonDemo, String.valueOf(i)).start();
+        }
 /*       new Thread(() -> this.common(2), "BB").start();
 
         new Thread(() -> this.common(2), "CC").start();
@@ -66,6 +70,25 @@ public class RedissonController {
                 e.printStackTrace();
             }
             RBucket<String> locktest = redissonClient.getBucket("locktest", StringCodec.INSTANCE);
+            System.out.println(locktest.get());
+            if(!StringUtils.isEmpty(locktest.get())){
+                lock.unlock();
+            }
+        }finally {
+            System.out.println(Thread.currentThread().getName()+"执行结束");
+        }
+    }
+
+    private void commonDemo(){
+        System.out.println(Thread.currentThread().getName()+"开始执行");
+        RLock lock = redissonClient.getFairLock("common");
+        while (lock.isLocked()){
+            System.out.println("被锁了");
+
+        }
+        try {
+            lock.lock();
+            RBucket<String> locktest = redissonClient.getBucket("localde", StringCodec.INSTANCE);
             System.out.println(locktest.get());
             if(!StringUtils.isEmpty(locktest.get())){
                 lock.unlock();

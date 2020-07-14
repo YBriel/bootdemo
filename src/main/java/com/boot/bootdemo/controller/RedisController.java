@@ -1,8 +1,6 @@
 package com.boot.bootdemo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RedisController {
 
-    @Autowired
+   // @Autowired
     private RedisTemplate<String,String> redisTemplate;
 
-    @RequestMapping("/testRedis")
+   // @RequestMapping("/testRedis")
     public void testRedis(){
         String s1 = redisTemplate.opsForList().leftPop("demo");
         System.out.println(redisTemplate.hashCode());

@@ -3,13 +3,16 @@ package com.boot.bootdemo;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.bootdemo.entity.Student;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.redisson.Redisson;
 import org.redisson.api.*;
 import org.redisson.client.codec.StringCodec;
 import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +21,11 @@ import java.util.Map;
  * Description:
  * Date: 2020/5/13   22:18
  */
-/*@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)*/
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
 //@RunWith(JUnit4.class)
 public class RedisTest {
 
-/*
     @Autowired
     private RedissonClient redissonClient;
 
@@ -37,7 +39,6 @@ public class RedisTest {
         String o = test.get();
         System.out.println(o);
     }
-*/
 
     @Test
     public void testdemo1(){

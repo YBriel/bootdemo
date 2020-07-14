@@ -1,3 +1,4 @@
+/*
 package com.boot.bootdemo;
 
 import com.google.common.base.Charsets;
@@ -15,9 +16,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+*/
 /**
  * @author Jason Song(song_s@ctrip.com)
- */
+ *//*
+
 public class SimpleApolloConfigDemo {
     private static final Logger logger = LoggerFactory.getLogger(SimpleApolloConfigDemo.class);
     private String DEFAULT_VALUE = "localhost:8080";
@@ -64,3 +67,4 @@ public class SimpleApolloConfigDemo {
         }
     }
 }
+*/

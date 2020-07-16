@@ -2,7 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.boot.bootdemo.aspect.Dict;
+import com.boot.bootdemo.aspect.EnableAuthCheck;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.config.MyResult;
 import com.boot.bootdemo.config.MyResultUtil;
@@ -10,7 +10,6 @@ import com.boot.bootdemo.entity.MyStudentEntity;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.StudentService;
-import org.apache.ibatis.executor.result.DefaultMapResultHandler;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -184,6 +180,7 @@ public class StudentController {
         return student;
     }
 
+    @EnableAuthCheck
     @RequestMapping("/queryStu")
     public MyResult<Student> queryStu(String name, Integer age){
         Student student = studentService.queryStu(name,age);

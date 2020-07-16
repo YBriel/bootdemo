@@ -17,7 +17,7 @@ public class MyInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("preHandle............");
+        System.out.println("这是拦截器！！！！！");
         return true;
     }
 

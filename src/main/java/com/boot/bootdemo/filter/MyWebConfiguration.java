@@ -47,6 +47,8 @@ public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/queryStu");
+
        // InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
        // interceptor.addPathPatterns("/**");
         //List<String> ex=new ArrayList<>();

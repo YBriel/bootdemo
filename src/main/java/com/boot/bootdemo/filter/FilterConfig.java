@@ -19,16 +19,17 @@ public class FilterConfig {
     public FilterRegistrationBean<MyFilter> filterRegistration(){
         FilterRegistrationBean<MyFilter> filterRegistration=new FilterRegistrationBean<>();
         filterRegistration.setFilter(new MyFilter());
-        filterRegistration.addUrlPatterns("/filter");
+        filterRegistration.addUrlPatterns("/queryStu");
         filterRegistration.addInitParameter("ERR_URL", "储物袋");
         return filterRegistration;
     }
 
     @Bean
     public FilterRegistrationBean<MyFilterDemo> myMyFilterDemo(){
+        System.out.println("这是过滤器！！！！！");
         FilterRegistrationBean<MyFilterDemo> filterRegistration=new FilterRegistrationBean<>();
         filterRegistration.setFilter(new MyFilterDemo());
-        filterRegistration.addUrlPatterns("/not");
+        filterRegistration.addUrlPatterns("/queryStu");
         filterRegistration.addInitParameter("ERR_URL", "储物袋");
         return filterRegistration;
     }

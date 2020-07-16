@@ -2,11 +2,13 @@ package com.boot.bootdemo.aspect;
 
 import com.boot.bootdemo.exception.TokenException;
 import org.apache.commons.lang.StringUtils;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -28,10 +30,12 @@ public class AuthCheckAspect {
     @Pointcut("@annotation(EnableAuthCheck)")
     public void pointCut(){}
 
-    @Before("pointCut()")
+    //@Before("pointCut()")
     public void checkAuth(){
+        System.out.println("切点开始执行");
         String token =(String) RequestContextHolder.getRequestAttributes().getAttribute("token", 0);
         System.out.println(token);
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest(); //第二种获取数据
         String token1 = req.getHeader("token");
         System.out.println(token1);
@@ -39,6 +43,7 @@ public class AuthCheckAspect {
             System.out.println("没带token");
             throw  new TokenException();
         }
+
 /*
 
         String token = request.getHeader("token");
@@ -46,5 +51,12 @@ public class AuthCheckAspect {
             System.out.println("没带token");
             throw  new TokenException();
         }*/
+    }
+
+    @Around("pointCut()")
+    public void around(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("around开始");
+        Object[] args = joinPoint.getArgs();
+        joinPoint.proceed(args);
     }
 }

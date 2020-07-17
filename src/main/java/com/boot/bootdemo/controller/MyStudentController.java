@@ -1,8 +1,9 @@
 package com.boot.bootdemo.controller;
 
+import com.boot.bootdemo.entity.InnerVo;
 import com.boot.bootdemo.entity.MyStudentEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.boot.bootdemo.entity.OuterVo;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +30,9 @@ public class MyStudentController {
     public List<MyStudentEntity> student1(){
         MyStudentEntity myStudentEntity=new MyStudentEntity();
         return   myStudentEntity.queryStudentById();
+    }
+    @PostMapping("/testStr1")
+    public void testStr(@RequestBody OuterVo outerVo){
+        System.out.println(outerVo);
     }
 }

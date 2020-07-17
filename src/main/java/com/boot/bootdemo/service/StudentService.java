@@ -11,4 +11,7 @@ import com.boot.bootdemo.entity.Student;
 public interface StudentService extends IService<Student> {
 
     Student queryStu(String name,Integer age);
+
+    int updStuById(Integer id,String name);
+
 }

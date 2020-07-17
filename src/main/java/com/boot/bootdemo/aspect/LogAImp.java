@@ -7,6 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -18,7 +20,9 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-public class LogAImp {
+//Order(1)
+//@Order(Ordered.LOWEST_PRECEDENCE)
+public class LogAImp implements Ordered{
    // @Before("execution(* com.wuychn.springbootaspect.controller.*.*(..))") // 所有controller包下面的所有方法的所有参数
 
     @Pointcut("")
@@ -32,5 +36,10 @@ public class LogAImp {
         LogA logA = method.getAnnotation(LogA.class);
         Object[] args = joinpoint.getArgs();
         System.out.println(logA.action()+"___________________****"+logA.title()+"&&&&&&&-----"+JSON.toJSONString(args));
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }

@@ -3,9 +3,7 @@ package com.boot.bootdemo.aspect;
 import com.boot.bootdemo.exception.TokenException;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
@@ -30,20 +28,21 @@ public class AuthCheckAspect {
     @Pointcut("@annotation(EnableAuthCheck)")
     public void pointCut(){}
 
-    //@Before("pointCut()")
+    @Before("pointCut()")
     public void checkAuth(){
-        System.out.println("切点开始执行");
+        System.out.println("切点 before 开始执行");
         String token =(String) RequestContextHolder.getRequestAttributes().getAttribute("token", 0);
         System.out.println(token);
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest(); //第二种获取数据
         String token1 = req.getHeader("token");
         System.out.println(token1);
-        if(StringUtils.isEmpty(token)){
+        if(StringUtils.isEmpty(token1)){
             System.out.println("没带token");
             throw  new TokenException();
         }
 
+        System.out.println("切点 before 结束执行");
 /*
 
         String token = request.getHeader("token");
@@ -54,9 +53,21 @@ public class AuthCheckAspect {
     }
 
     @Around("pointCut()")
-    public void around(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("around开始");
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("切面around开始");
         Object[] args = joinPoint.getArgs();
-        joinPoint.proceed(args);
+        Object proceed = joinPoint.proceed(args);
+        System.out.println("切面around结束");
+        return proceed;
+    }
+
+    @After("pointCut()")
+    public void afterAuth(){
+        System.out.println("切点 After 开始执行");
+    }
+
+    @AfterThrowing("pointCut()")
+    public void exceptionAuth(){
+        System.out.println("切点 exceptionAuth 开始执行");
     }
 }

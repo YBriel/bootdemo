@@ -2,6 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.EnableAuthCheck;
 import com.boot.bootdemo.aspect.SameUrlData;
 import com.boot.bootdemo.config.MyResult;
@@ -175,6 +176,7 @@ public class StudentController {
     }
 
     @RequestMapping("/testStudentDict")
+    @Dict
     public Student query(String name,Integer age){
         Student student = studentService.queryStu(name,age);
         return student;
@@ -182,8 +184,14 @@ public class StudentController {
 
     @EnableAuthCheck
     @RequestMapping("/queryStu")
+    //@Dict
     public MyResult<Student> queryStu(String name, Integer age){
         Student student = studentService.queryStu(name,age);
         return MyResultUtil.succ(student);
+    }
+
+    @RequestMapping("/updStuById")
+    public Integer updStuById(Integer id,String name){
+        return studentService.updStuById(id,name);
     }
 }

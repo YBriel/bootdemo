@@ -24,7 +24,7 @@ public class FilterConfig {
         return filterRegistration;
     }
 
-    @Bean
+    //@Bean
     public FilterRegistrationBean<MyFilterDemo> myMyFilterDemo(){
         System.out.println("这是过滤器！！！！！");
         FilterRegistrationBean<MyFilterDemo> filterRegistration=new FilterRegistrationBean<>();

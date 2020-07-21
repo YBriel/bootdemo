@@ -112,4 +112,25 @@ public class RedisTest {
         System.out.println(region);
         redissonClient.shutdown();
     }
+
+    @Test
+    public void testdemo4(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://39.106.121.52:6379");
+
+
+        RedissonClient redisson = Redisson.create(config);
+        RGeo<String> geo = redisson.getGeo("test1");
+      /*  geo.add(new GeoEntry(115.861166,28.742931,"shuanggang"));
+        geo.add(new GeoEntry(115.886572,28.75008,"baishuihu"));
+        geo.add(new GeoEntry(115.85224,28.684065,"ditie"));
+        geo.add(new GeoEntry(115.785549,28.650552,"yongyou"));
+        geo.add(new GeoEntry(115.925539,28.634658,"hongdu"));
+        geo.add(new GeoEntry(115.838936,28.741351,"nantian"));
+        geo.add(new GeoEntry(115.913409,28.855678,"test"));*/
+        geo.add(new GeoEntry(111.838936,28.741351,"nantian"));
+       /* boolean yongyou = geo.remove("ditie");
+        System.out.println(yongyou);*/
+        redisson.shutdown();
+    }
 }

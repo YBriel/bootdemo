@@ -39,7 +39,19 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Override
 
     public Student queryStu(String name,Integer age) {
-
+        ThreadPoolExecutor threadPoolExecutor = testThreadPool.getThreadPoolExecutor();
+        int activeCount = threadPoolExecutor.getActiveCount();
+        int corePoolSize = threadPoolExecutor.getCorePoolSize();
+        int poolSize = threadPoolExecutor.getPoolSize();
+        long completedTaskCount = threadPoolExecutor.getCompletedTaskCount();
+        int largestPoolSize = threadPoolExecutor.getLargestPoolSize();
+        int maximumPoolSize = threadPoolExecutor.getMaximumPoolSize();
+        int size = threadPoolExecutor.getQueue().size();
+        long taskCount = threadPoolExecutor.getTaskCount();
+        long keepAliveTime = threadPoolExecutor.getKeepAliveTime(TimeUnit.SECONDS);
+        ThreadFactory threadFactory = threadPoolExecutor.getThreadFactory();
+        log.info("activeCount {} corePoolSize {} poolSize {} completedTaskCount {} largestPoolSize {} maximumPoolSize{} queueSize {} taskCount {} keepAliveTime {}",
+                activeCount,corePoolSize,poolSize,completedTaskCount,largestPoolSize,maximumPoolSize,size,taskCount,keepAliveTime);
         Student student=new Student();
         student.setAge(age);
         student.setName(name);
@@ -76,7 +88,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
                     activeCount,corePoolSize,poolSize,completedTaskCount,largestPoolSize,maximumPoolSize,size,taskCount,keepAliveTime);
 
             //log.info("开始休眠{}",Thread.currentThread().getName());
-            Thread.sleep(3);
+            Thread.sleep(2000);
             //log.info("休眠结束{}",Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();

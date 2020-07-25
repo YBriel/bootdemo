@@ -26,8 +26,8 @@ public class MyThreadPoolConfig {
         executor.setThreadNamePrefix("testThreadPool-"); //线程名
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy()); //拒绝直接丢弃策略
         executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.setAwaitTerminationSeconds(5);
-        executor.setAllowCoreThreadTimeOut(true); //设置核心线程到时关闭
+        executor.setAwaitTerminationSeconds(10);
+        //executor.setAllowCoreThreadTimeOut(true); //设置核心线程到时关闭
         executor.initialize();
         return executor;
     }

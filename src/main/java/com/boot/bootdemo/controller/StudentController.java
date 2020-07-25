@@ -13,11 +13,13 @@ import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.StudentService;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -186,12 +188,51 @@ public class StudentController {
     @RequestMapping("/queryStu")
     //@Dict
     public MyResult<Student> queryStu(String name, Integer age){
-        Student student = studentService.queryStu(name,age);
-        return MyResultUtil.succ(student);
+       /* Student student = studentService.queryStu(name,age);
+        return MyResultUtil.succ(student);*/
+       return MyResultUtil.succ(new Student());
     }
 
     @RequestMapping("/updStuById")
     public Integer updStuById(Integer id,String name){
         return studentService.updStuById(id,name);
+    }
+
+    @RequestMapping("/testException")
+    public String testException(){
+        Student student=new Student();
+        String substring = student.getName().substring(1, 3);
+        try {
+
+            if(StringUtils.isEmpty(student.getId())){
+                System.out.println("出异常了");
+            }
+        }catch (ArithmeticException e){
+            e.printStackTrace();
+            System.out.println("出异常了");
+        }
+        return "哈哈哈";
+    }
+
+    @RequestMapping("/testException1")
+    public String testException1(){
+        Student student=new Student();
+        if(StringUtils.isEmpty(student.getName())){
+           try {
+               String[] split = student.getName().split(",");
+           }catch (NullPointerException e){
+               e.printStackTrace();
+               System.out.println("空指针异常了。。。。。。");
+           }
+//            throw new NullPointerException();
+            System.out.println("哈哈哈哈");
+        }
+        return "哈哈哈1";
+    }
+
+
+    @RequestMapping("/testThreadPool")
+    public String testThreadPool(){
+       return studentService.testThreadPool();
     }
 }

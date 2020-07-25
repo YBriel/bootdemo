@@ -14,4 +14,6 @@ public interface StudentService extends IService<Student> {
 
     int updStuById(Integer id,String name);
 
+    String testThreadPool();
+
 }

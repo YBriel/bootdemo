@@ -31,4 +31,13 @@ public class MyException {
     }
 
 
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String nullPointerException(Exception e){
+        e.printStackTrace();
+        return "空指针了！";
+    }
+
+
+
 }

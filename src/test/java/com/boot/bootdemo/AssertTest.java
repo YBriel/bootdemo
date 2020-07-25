@@ -11,8 +11,9 @@ public class AssertTest {
 
     public static void main(String[] args) {
 
-        Integer a=11;
+        int i=1/0;
+        /*Integer a=11;
         Assert.notNull(a,"不能为空啊");
-        System.out.println(a);
+        System.out.println(a);*/
     }
 }

@@ -22,11 +22,11 @@ public class MyThreadPoolConfig {
         executor.setCorePoolSize(2);  //核心线程
         executor.setMaxPoolSize(4); //最大线程
         executor.setQueueCapacity(11);  //队列容量
-        executor.setKeepAliveSeconds(60);  //最大存活时间
+        executor.setKeepAliveSeconds(1);  //最大存活时间
         executor.setThreadNamePrefix("testThreadPool-"); //线程名
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy()); //拒绝直接丢弃策略
         executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.setAwaitTerminationSeconds(10);
+       // executor.setAwaitTerminationSeconds(10);
         //executor.setAllowCoreThreadTimeOut(true); //设置核心线程到时关闭
         executor.initialize();
         return executor;

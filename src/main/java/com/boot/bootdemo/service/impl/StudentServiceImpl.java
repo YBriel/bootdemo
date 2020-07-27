@@ -86,7 +86,6 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
             ThreadFactory threadFactory = threadPoolExecutor.getThreadFactory();
             log.info("activeCount {} corePoolSize {} poolSize {} completedTaskCount {} largestPoolSize {} maximumPoolSize{} queueSize {} taskCount {} keepAliveTime {}",
                     activeCount,corePoolSize,poolSize,completedTaskCount,largestPoolSize,maximumPoolSize,size,taskCount,keepAliveTime);
-
             //log.info("开始休眠{}",Thread.currentThread().getName());
             Thread.sleep(2000);
             //log.info("休眠结束{}",Thread.currentThread().getName());
@@ -96,5 +95,59 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         return "执行成功";
     }
 
+
+    public String futureTask() throws InterruptedException, ExecutionException, TimeoutException {
+        FutureTask<String> stringFutureTask=new FutureTask<>(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return "哈哈哈哈哈";
+            }
+        });
+        return stringFutureTask.get(1000,TimeUnit.MILLISECONDS);
+    }
+
+    public String futureTaskDemo() {
+        FutureTask<String> stringFutureTask=new FutureTask<>(() -> "哈哈哈哈哈");
+        try {
+            return stringFutureTask.get(1000,TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            log.info("超时没拿到数据超时时间1000毫秒");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String futureTaskDemo(long time,long sleepTime) {
+       // FutureTask<String> stringFutureTask=new FutureTask<>(() -> "哈哈哈哈哈");
+        FutureTask<String> stringFutureTask=new FutureTask<>(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                System.out.println("哈哈哈哈哈哈哈");
+                return "哈哈哈";
+            }
+        });
+        System.out.println("哈哈哈哈哈哈哈");
+        try {
+            String s = stringFutureTask.get();
+            System.out.println("---------------------"+s);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(sleepTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            return stringFutureTask.get(time,TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            log.info("time {}执行有问题了",time);
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

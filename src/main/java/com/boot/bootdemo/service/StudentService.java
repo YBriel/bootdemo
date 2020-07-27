@@ -3,9 +3,6 @@ package com.boot.bootdemo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.boot.bootdemo.entity.Student;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
-
 /**
  * Author： yuzq
  * Description:
@@ -20,9 +17,4 @@ public interface StudentService extends IService<Student> {
     String testThreadPool();
 
 
-    String futureTask() throws InterruptedException , ExecutionException, TimeoutException;
-
-    String futureTaskDemo();
-
-    String futureTaskDemo(long time,long sleepTime);
 }

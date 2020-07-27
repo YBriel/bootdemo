@@ -10,16 +10,17 @@ import com.boot.bootdemo.config.MyResultUtil;
 import com.boot.bootdemo.entity.MyStudentEntity;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
+import com.boot.bootdemo.service.MyFutureTask;
 import com.boot.bootdemo.service.StudentService;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,6 +45,9 @@ public class StudentController {
     private StudentMapper studentMapper;
     @Resource
     private SqlSession sqlSession;
+
+    @Autowired
+    private MyFutureTask futureTask;
 
     private  ExecutorService executorService=Executors.newFixedThreadPool(5);;
 
@@ -240,16 +244,16 @@ public class StudentController {
 
     @RequestMapping("/futureTask")
     public String futureTask() throws InterruptedException, ExecutionException, TimeoutException {
-        return studentService.futureTask();
+        return futureTask.futureTask();
     }
 
     @RequestMapping("/futureTaskDe")
     public String futureTaskDe() {
-        return studentService.futureTaskDemo();
+        return futureTask.futureTaskDemo();
     }
 
     @RequestMapping("/futureTaskDemo")
     public String futureTaskDemo(long time,long sleepTime){
-        return studentService.futureTaskDemo(time,sleepTime);
+        return futureTask.futureTaskDemo(time,sleepTime);
     }
 }

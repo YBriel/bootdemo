@@ -24,8 +24,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Author： yuzq
@@ -234,5 +236,20 @@ public class StudentController {
     @RequestMapping("/testThreadPool")
     public String testThreadPool(){
        return studentService.testThreadPool();
+    }
+
+    @RequestMapping("/futureTask")
+    public String futureTask() throws InterruptedException, ExecutionException, TimeoutException {
+        return studentService.futureTask();
+    }
+
+    @RequestMapping("/futureTaskDe")
+    public String futureTaskDe() {
+        return studentService.futureTaskDemo();
+    }
+
+    @RequestMapping("/futureTaskDemo")
+    public String futureTaskDemo(long time,long sleepTime){
+        return studentService.futureTaskDemo(time,sleepTime);
     }
 }

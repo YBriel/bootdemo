@@ -135,4 +135,34 @@ public class FutureTaskImpl implements MyFutureTask {
         }
         return "超时了";
     }
+
+    public String futureTaskPoolCallable(long time,long sleepTime) throws ExecutionException, InterruptedException {
+        FutureTask<String> stringFutureTask=new FutureTask<>(() -> {
+            try {
+                TimeUnit.MILLISECONDS.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "哈哈哈";
+        });
+
+        Future<String> submit1 = testThreadPool.submit(() -> "lambda call");
+        System.out.println(submit1.get());
+
+        Callable<String> callable = () -> "这是callable输出的";
+
+
+        // new FutureTask<>()
+        Future<String> submit = testThreadPool.submit(callable);
+
+        try {
+            String s = submit.get(time, TimeUnit.MILLISECONDS);
+            System.out.println(s);
+            return submit.get(time,TimeUnit.MILLISECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            log.info("time {}执行有问题了",time);
+            e.printStackTrace();
+        }
+        return "超时了";
+    }
 }

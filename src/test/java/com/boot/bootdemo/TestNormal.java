@@ -7,7 +7,7 @@ package com.boot.bootdemo;
 public class TestNormal {
 
     public static void main(String[] args) {
-        int i = 5;
+       /* int i = 5;
         switch (i){
             case 5:
                 System.out.println("是个5");
@@ -21,7 +21,19 @@ public class TestNormal {
             default:
                 System.out.println("默认值");
                 break;
-        }
+        }*/
 
+        for (int i = 0; i < 100; i++) {
+            new Thread(()->{
+                System.out.println("执行开始"+Thread.currentThread().getName());
+                    try {
+                        Thread.sleep(30000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                System.out.println("执行完毕"+Thread.currentThread().getName());
+                },i+"").start();
+
+        }
     }
 }

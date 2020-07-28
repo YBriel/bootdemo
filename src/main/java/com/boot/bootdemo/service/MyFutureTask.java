@@ -16,4 +16,6 @@ public interface MyFutureTask {
     String futureTaskDemo();
 
     String futureTaskDemo(long time,long sleepTime);
+
+    String futureTaskPoolCallable(long time,long sleepTime) throws ExecutionException, InterruptedException;
 }

@@ -256,4 +256,9 @@ public class StudentController {
     public String futureTaskDemo(long time,long sleepTime){
         return futureTask.futureTaskDemo(time,sleepTime);
     }
+
+    @RequestMapping("/futureTaskCall")
+    public String futureTaskCall(long time,long sleepTime) throws ExecutionException, InterruptedException {
+        return futureTask.futureTaskPoolCallable(time,sleepTime);
+    }
 }

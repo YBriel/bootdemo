@@ -15,7 +15,10 @@ public class LogTest {
     private static Logger logger= LoggerFactory.getLogger(LogTest.class);
 
     public static void main(String[] args) {
-        logger.info("这是info");
+
+        String aa="20200728南昌易至出行订单数据.xlsx";
+        System.out.println(aa.getBytes().length);
+/*        logger.info("这是info");
         logger.warn("这是warn");
         logger.debug("这是debug");
         logger.error("这是error");
@@ -23,6 +26,6 @@ public class LogTest {
         Student student=new Student();
         student.setAge(22);
         student.setName("tom");
-        logger.info("ss",student.getName());
+        logger.info("ss",student.getName());*/
     }
 }

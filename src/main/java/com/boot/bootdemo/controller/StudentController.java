@@ -12,6 +12,7 @@ import com.boot.bootdemo.entity.MyStudentEntity;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.MyFutureTask;
+import com.boot.bootdemo.service.MyRunnableTest;
 import com.boot.bootdemo.service.StudentService;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
@@ -271,6 +272,22 @@ public class StudentController {
     public String testWait(){
         System.out.println("这是里面的开始");
         testThreadPool.submit(new AsyncTest());
+        System.out.println("这是里面的开始");
+        return "success";
+    }
+
+    @RequestMapping("/testRunnable")
+    public String testRunnable(){
+        System.out.println("这是里面的开始");
+        testThreadPool.submit(new MyRunnableTest("我是名字"));
+        System.out.println("这是里面的开始");
+        return "success";
+    }
+
+    @RequestMapping("/testCallable")
+    public String testCallable(){
+        System.out.println("这是里面的开始");
+        testThreadPool.submit(new MyRunnableTest("我是名字"));
         System.out.println("这是里面的开始");
         return "success";
     }

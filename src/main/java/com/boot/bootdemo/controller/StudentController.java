@@ -2,6 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.boot.bootdemo.aspect.AsyncTest;
 import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.EnableAuthCheck;
 import com.boot.bootdemo.aspect.SameUrlData;
@@ -15,6 +16,7 @@ import com.boot.bootdemo.service.StudentService;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +50,9 @@ public class StudentController {
 
     @Autowired
     private MyFutureTask futureTask;
+
+    @Resource
+    private ThreadPoolTaskExecutor testThreadPool;
 
     private  ExecutorService executorService=Executors.newFixedThreadPool(5);;
 
@@ -260,5 +265,13 @@ public class StudentController {
     @RequestMapping("/futureTaskCall")
     public String futureTaskCall(long time,long sleepTime) throws ExecutionException, InterruptedException {
         return futureTask.futureTaskPoolCallable(time,sleepTime);
+    }
+
+    @RequestMapping("/testWait")
+    public String testWait(){
+        System.out.println("这是里面的开始");
+        testThreadPool.submit(new AsyncTest());
+        System.out.println("这是里面的开始");
+        return "success";
     }
 }

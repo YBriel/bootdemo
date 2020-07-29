@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableAsync(proxyTargetClass = true)
+//@EnableAsync(proxyTargetClass = true)
 public class BootdemoApplication {
 
     public static void main(String[] args) {

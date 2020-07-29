@@ -151,7 +151,6 @@ public class FutureTaskImpl implements MyFutureTask {
 
         Callable<String> callable = () -> "这是callable输出的";
 
-
         // new FutureTask<>()
         Future<String> submit = testThreadPool.submit(callable);
 

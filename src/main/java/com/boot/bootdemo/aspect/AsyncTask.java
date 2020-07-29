@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AsyncTask {
 
-    @Async
+    //@Async
     public void test() throws InterruptedException {
-        System.out.println("执行开始--------");
+        System.out.println("test执行开始--------");
         Thread.sleep(5000);
-        System.out.println("执行结束--------");
+        System.out.println("test执行结束--------");
     }
 
 }

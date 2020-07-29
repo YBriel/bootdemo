@@ -60,25 +60,25 @@ public class AuthCheckAspect {
 
     @AfterReturning(value = "pointCut()",returning = "obj")
     public void afterReturning(JoinPoint joinPoint, Object obj) throws InterruptedException {
-        System.out.println("切面执行returning");
+        System.out.println("afterReturning... "+"切面执行returning");
         asyncTask.test();
-        System.out.println("切面执行returning");
         System.out.println(JSON.toJSONString(obj));
     }
 
     @Around("pointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("切面around开始");
+        System.out.println("around... "+System.currentTimeMillis());
         Object[] args = joinPoint.getArgs();
         Object proceed = joinPoint.proceed(args);
-
+        System.out.println("around... "+System.currentTimeMillis());
         System.out.println("切面around结束");
         return proceed;
     }
 
     @After("pointCut()")
     public void afterAuth()throws Throwable{
-
+        System.out.println(System.currentTimeMillis());
         System.out.println("切点 After 开始执行");
     }
 

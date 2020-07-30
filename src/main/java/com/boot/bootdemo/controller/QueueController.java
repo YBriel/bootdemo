@@ -46,14 +46,16 @@ public class QueueController {
 
         log.info("哈哈哈{}",aa);
 
-        /*        InputStream inputStream = request.getInputStream();
+        InputStream inputStream = request.getInputStream();
+        StringBuffer requestURL = request.getRequestURL();
+        String servletPath = request.getServletPath();
         byte[] bytes;
         bytes = new byte[1024];
         int read = inputStream.read(bytes);
         System.out.println(read);
         String str = new String(bytes);
         System.out.println(str);
-        return str;*/
+        return str;
 
 
        /* BufferedReader br = request.getReader();
@@ -75,7 +77,7 @@ public class QueueController {
         System.out.println(x);
     }
     return "sss";*/
-
+/*
         StringBuilder sb = new StringBuilder();
         try(BufferedReader reader = request.getReader();) {
             char[]buff = new char[1024];
@@ -86,7 +88,7 @@ public class QueueController {
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return sb.toString();
+        return sb.toString();*/
     }
 
 }

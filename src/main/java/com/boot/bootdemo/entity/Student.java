@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-@NoArgsConstructor
 public class Student extends BaseEntity<Student>{
 
     //@Dict(dictName = "stu" ,dictKey = "id")
@@ -24,7 +23,12 @@ public class Student extends BaseEntity<Student>{
     @Dict(dictName = "stu" ,dictKey = "age")
     private int age;
 
-/*    private String nameStr;
+    public Student() {
+
+        System.out.println("这是学生的构造器打印出来的！");
+    }
+
+    /*    private String nameStr;
 
     private String ageStr;*/
 

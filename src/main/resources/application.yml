@@ -60,5 +60,5 @@ mybatis-plus:
 yuzq:
   hobby: xxx
   name: yuzzz
-logging:
-  config: classpath:logback-spring-test.xml
+#logging:
+#  config: classpath:logback-spring-test.xml

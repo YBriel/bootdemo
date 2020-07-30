@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <contextName>logback</contextName>
+    <!--本地日志地址-->
+    <!--<property name="log.path" value="C://servicelogs/" />-->
+
+    <!--测试服务器日志地址-->
+    <!--日志存储路径-->
+    <property name="log.path" value="D://logback/" />
+    <!--日志文件前缀-->
+    <property name="log.context.name" value="bootdemo1" />
+    <property name="web.business.name" value="web" />
+    <property name="log.charset" value="UTF-8" />
+    <property name="log.maxHistory" value="30" />
+    <property name="log.pattern" value="[%-5level] %date --%thread-- [%logger:%L] %msg %n" />
+    <property name="log.error.log.level" value="ERROR" />
+    <property name="log.info.log.level" value="INFO" />
+    <property name="log.async.queue.size" value="1024" />
+
+    <!--ConsoleAppender是打印到控制台的-->
+    <!-- appender是configuration的子节点，是负责写日志的组件。 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${log.charset}</charset>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}${log.context.name}-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${log.charset}</charset>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>${log.error.log.level}</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}${log.context.name}-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${log.charset}</charset>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>${log.info.log.level}</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}${log.context.name}-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${log.maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>${log.charset}</charset>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--RollingFileAppender，滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件-->
+    <!--<appender name="webAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+    <!--<level>${log.info.log.level}</level>-->
+    <!--</filter>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${log.path}${log.context.name}-${mgr.business.name}.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+    <!--<maxHistory>${log.maxHistory}</maxHistory>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+    <!--<charset>${log.charset}</charset>-->
+    <!--<pattern>${log.pattern}</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--&lt;!&ndash;使用LoggerFactory.getLogger("webLogger") 使用这个logger&ndash;&gt;-->
+    <!--<logger name="webLogger" additivity="false">-->
+    <!--&lt;!&ndash;使用哪一个Appender&ndash;&gt;-->
+    <!--<appender-ref ref="webAppender" />-->
+    <!--</logger>-->
+
+    <!--    &lt;!&ndash;RollingFileAppender，滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件&ndash;&gt;-->
+    <!--    <appender name="apiAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+    <!--            <level>${log.info.log.level}</level>-->
+    <!--        </filter>-->
+    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--            <fileNamePattern>${log.path}${log.context.name}-${api.business.name}.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+    <!--            <maxHistory>${log.maxHistory}</maxHistory>-->
+    <!--        </rollingPolicy>-->
+    <!--        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+    <!--            <charset>${log.charset}</charset>-->
+    <!--            <pattern>${log.pattern}</pattern>-->
+    <!--        </encoder>-->
+    <!--    </appender>-->
+    <!--    &lt;!&ndash;使用LoggerFactory.getLogger("apiLogger") 使用这个logger&ndash;&gt;-->
+    <!--    <logger name="apiLogger" additivity="false">-->
+    <!--        &lt;!&ndash;使用哪一个Appender&ndash;&gt;-->
+    <!--        <appender-ref ref="apiAppender" />-->
+    <!--    </logger>-->
+
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR" />
+    </root>
+
+</configuration>

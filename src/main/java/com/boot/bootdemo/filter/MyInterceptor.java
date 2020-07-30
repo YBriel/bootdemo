@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Description:
  * Date: 2020/2/20   9:10
  */
-@Component
+//@Component
 public class MyInterceptor implements HandlerInterceptor {
 
     @Override

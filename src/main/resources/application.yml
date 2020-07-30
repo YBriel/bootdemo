@@ -4,6 +4,8 @@ server:
 
 #配置数据源
 spring:
+  application:
+    name: bootdemo
   datasource:
     url: jdbc:mysql://39.106.121.52:3306/haoke?useUnicode=true&characterEncoding=utf-8
     username: root
@@ -31,6 +33,8 @@ spring:
     host: 39.106.121.52
     password: mz666
     port: 6379
+  profiles:
+    active: test
 
 mybatis-plus:
   configuration:
@@ -43,11 +47,18 @@ mybatis-plus:
       logic-not-delete-value: 1
       logic-delete-field: state  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
 
-
 #logging:
-  #  level:
-  #    com.boot.bootdemo.mapper: debug
+#    level:
+#      com.boot.bootdemo.mapper: debug
+#    file: ${spring.application.name}.log
+#
+#    path: D:// #日志文件路径 这里${user.home}为当前服务器用户主目录
+#    pattern:
+#      console: "%d{yyyy/MM/dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n"
+
 
 yuzq:
   hobby: xxx
   name: yuzzz
+logging:
+  config: classpath:logback-spring-test.xml

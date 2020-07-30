@@ -17,7 +17,7 @@ import java.util.List;
  * Description:
  * Date: 2020/2/20   9:18
  */
-@Configuration
+//@Configuration
 public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override

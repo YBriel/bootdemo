@@ -2,6 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.boot.bootdemo.config.MyLinkedListConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,7 @@ public class QueueController {
         return sb.toString();
     }
 
-    @RequestMapping("/testHttpStr")
+    @PostMapping("/testHttpStr")
     public String testHttpStr(HttpServletRequest request,String aa) throws IOException {
 
         log.info("哈哈哈{}",aa);

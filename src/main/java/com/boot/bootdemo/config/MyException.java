@@ -1,7 +1,9 @@
 package com.boot.bootdemo.config;
 
 import com.boot.bootdemo.exception.TokenException;
+import com.boot.bootdemo.util.PrintStackTraceUtil;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * create: 2020-06-05 12:06
  **/
 @ControllerAdvice
+@Slf4j
 public class MyException {
 
     @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
@@ -34,7 +37,7 @@ public class MyException {
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public String nullPointerException(Exception e){
-        e.printStackTrace();
+        log.info("空指针错误{}", PrintStackTraceUtil.getStackTraceInfo(e));
         return "空指针了！";
     }
 

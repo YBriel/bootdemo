@@ -37,6 +37,7 @@ public class MyException {
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public String nullPointerException(Exception e){
+        log.error("空指针了",e);
         log.info("空指针错误{}", PrintStackTraceUtil.getStackTraceInfo(e));
         return "空指针了！";
     }

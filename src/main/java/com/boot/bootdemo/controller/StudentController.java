@@ -229,16 +229,17 @@ public class StudentController {
     @RequestMapping("/testException1")
     public String testException1(){
         Student student=new Student();
-        if(StringUtils.isEmpty(student.getName())){
+        String[] split = student.getName().split(",");
+/*        if(StringUtils.isEmpty(student.getName())){
            try {
-               String[] split = student.getName().split(",");
+
            }catch (NullPointerException e){
                e.printStackTrace();
                System.out.println("空指针异常了。。。。。。");
            }
 //            throw new NullPointerException();
             System.out.println("哈哈哈哈");
-        }
+        }*/
         return "哈哈哈1";
     }
 

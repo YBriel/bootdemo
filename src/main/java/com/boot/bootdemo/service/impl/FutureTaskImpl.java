@@ -155,6 +155,7 @@ public class FutureTaskImpl implements MyFutureTask {
         Future<String> submit = testThreadPool.submit(callable);
 
         try {
+
             String s = submit.get(time, TimeUnit.MILLISECONDS);
             System.out.println(s);
             return submit.get(time,TimeUnit.MILLISECONDS);

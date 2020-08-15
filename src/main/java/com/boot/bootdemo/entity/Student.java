@@ -25,7 +25,7 @@ public class Student extends BaseEntity<Student>{
 
     public Student() {
 
-        System.out.println("这是学生的构造器打印出来的！");
+        //System.out.println("这是学生的构造器打印出来的！");
     }
 
     /*    private String nameStr;

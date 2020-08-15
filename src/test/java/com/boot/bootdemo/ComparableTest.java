@@ -26,6 +26,9 @@ public class ComparableTest {
 
 
         List<Person> people=new ArrayList<>();
+
+        List<Person> collect4 = people.stream().sorted().collect(Collectors.toList());
+
         Person p=new Person("tom",22);
         Person p1=new Person("jerry",21);
         people.add(p);

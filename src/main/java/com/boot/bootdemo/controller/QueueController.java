@@ -1,6 +1,7 @@
 package com.boot.bootdemo.controller;
 
 import com.boot.bootdemo.config.MyLinkedListConfig;
+import com.boot.bootdemo.config.MyLinkedListConfigNew;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,12 @@ public class QueueController {
     @RequestMapping("/test")
     public String test(Long aa){
         MyLinkedListConfig.queue(aa);
+        return "success";
+    }
+
+    @RequestMapping("/testNew")
+    public String testNew(Long aa){
+        MyLinkedListConfigNew.queue(aa);
         return "success";
     }
 

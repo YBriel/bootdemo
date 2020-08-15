@@ -34,7 +34,7 @@ spring:
     password: mz666
     port: 6379
   profiles:
-    active: test
+    active: dev
 
 mybatis-plus:
   configuration:
@@ -60,5 +60,5 @@ mybatis-plus:
 yuzq:
   hobby: xxx
   name: yuzzz
-logging:
-  config: classpath:logback-spring-test.xml
+#logging:
+#  config: classpath:logback-spring-test.xml

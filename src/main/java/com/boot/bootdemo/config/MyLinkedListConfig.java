@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * create: 2020-07-30 09:36
  **/
 @Slf4j
-@Component
+//@Component
 public class MyLinkedListConfig implements Runnable {
 
     public static LinkedListDemo linkedListDemo=new LinkedListDemo(5);
@@ -54,10 +54,10 @@ public class MyLinkedListConfig implements Runnable {
 
     }
 
-    @PostConstruct
+   // @PostConstruct
     public void runTask(){
         log.info("task submitted");
-        testThreadPool.submit(this);
+       // testThreadPool.submit(this);
 /*        testThreadPool.submit(() -> {
             while (true){
                // log.info("the  size{}",linkedListDemo.getBlockingQueue().size());

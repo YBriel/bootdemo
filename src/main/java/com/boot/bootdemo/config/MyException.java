@@ -41,7 +41,4 @@ public class MyException {
         log.info("空指针错误{}", PrintStackTraceUtil.getStackTraceInfo(e));
         return "空指针了！";
     }
-
-
-
 }

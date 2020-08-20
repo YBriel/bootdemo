@@ -6,7 +6,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import static java.util.stream.MyResultoList;
+import static java.util.stream.Collectors.toList;
+
 
 /**
  * 方法引用

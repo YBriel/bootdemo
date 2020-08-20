@@ -196,6 +196,11 @@ public class StudentController {
         return student;
     }
 
+    @RequestMapping("/querySt")
+    public Student querySt(Student student){
+        return student;
+    }
+
     @EnableAuthCheck
     @RequestMapping("/queryStu")
     //@Dict

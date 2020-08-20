@@ -12,10 +12,10 @@ import java.util.List;
  * Description:
  * Date: 2020/2/24   16:35
  */
-//@Configuration
+@Configuration
 public class FilterConfig {
 
-   // @Bean
+    @Bean
     public FilterRegistrationBean<MyFilter> filterRegistration(){
         FilterRegistrationBean<MyFilter> filterRegistration=new FilterRegistrationBean<>();
         filterRegistration.setFilter(new MyFilter());
@@ -24,7 +24,7 @@ public class FilterConfig {
         return filterRegistration;
     }
 
-    //@Bean
+    @Bean
     public FilterRegistrationBean<MyFilterDemo> myMyFilterDemo(){
         System.out.println("这是过滤器！！！！！");
         FilterRegistrationBean<MyFilterDemo> filterRegistration=new FilterRegistrationBean<>();

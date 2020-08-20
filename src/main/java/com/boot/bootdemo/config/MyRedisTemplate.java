@@ -11,9 +11,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+import javax.net.ssl.*;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -46,7 +44,11 @@ public class MyRedisTemplate {
                 return new X509Certificate[]{};
             }
         }}, new java.security.SecureRandom());
-        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
+        HostnameVerifier ignoreHostnameVerifier = (s, sslsession) -> {
+            System.out.println("WARNING: Hostname is not matched for cert.");
+            return true;
+        };
+        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext,ignoreHostnameVerifier);
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setSSLSocketFactory(csf)
                 .build();

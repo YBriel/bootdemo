@@ -1,5 +1,3 @@
-
-
 #配置数据源
 spring:
   datasource:
@@ -25,8 +23,7 @@ spring:
       filters: stat
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
-  application:
-    name: bootdemo
+
   redis:
     host: 39.106.121.52
     password: mz666
@@ -60,14 +57,11 @@ yuzq:
   name: yuzzz
 #logging:
 #  config: classpath:logback-spring-test.xml
-nacos:
-  discovery:
-    server-addr: 122.51.250.57:8848
+
+   # enabled: true
 #    auto-register: true
 #    register:
 #      enabled: true
 
 
-server:
-  port: 8089
 

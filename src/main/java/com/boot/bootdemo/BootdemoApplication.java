@@ -6,9 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
 @EnableDiscoveryClient
-//@EnableNacosDiscovery(globalProperties = @NacosProperties(serverAddr = "122.51.250.57:8848"))
+@EnableFeignClients
 //@EnableAsync(proxyTargetClass = true)
 public class BootdemoApplication {
 

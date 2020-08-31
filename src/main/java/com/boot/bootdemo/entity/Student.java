@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 /**
  * Author： yuzq
  * Description:
- * Date: 2020/4/11   19:58
+ * Date: 2020/4/11   19:58 extends BaseEntity<Student>
  */
 
 @Data
-public class Student extends BaseEntity<Student>{
+public class Student{
 
     //@Dict(dictName = "stu" ,dictKey = "id")
     private int id;

@@ -1,0 +1,13 @@
+nacos:
+  discovery:
+    server-addr: 122.51.250.57:8848
+    enabled: true
+#    context-path:
+
+
+server:
+  port: 8089
+
+spring:
+  application:
+    name: bootdemo

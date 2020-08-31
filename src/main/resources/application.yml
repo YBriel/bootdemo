@@ -1,11 +1,7 @@
-server:
-  port: 8089
 
 
 #配置数据源
 spring:
-  application:
-    name: bootdemo
   datasource:
     url: jdbc:mysql://39.106.121.52:3306/haoke?useUnicode=true&characterEncoding=utf-8
     username: root
@@ -29,12 +25,14 @@ spring:
       filters: stat
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+  application:
+    name: bootdemo
   redis:
     host: 39.106.121.52
     password: mz666
     port: 6379
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
 
 mybatis-plus:
   configuration:
@@ -62,3 +60,14 @@ yuzq:
   name: yuzzz
 #logging:
 #  config: classpath:logback-spring-test.xml
+nacos:
+  discovery:
+    server-addr: 122.51.250.57:8848
+#    auto-register: true
+#    register:
+#      enabled: true
+
+
+server:
+  port: 8089
+

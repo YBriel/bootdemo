@@ -234,7 +234,7 @@ public class StudentController {
     @RequestMapping("/testException1")
     public String testException1(){
         Student student=new Student();
-        String[] split = student.getName().split(",");
+        //String[] split = student.getName().split(",");
 /*        if(StringUtils.isEmpty(student.getName())){
            try {
 

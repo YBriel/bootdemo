@@ -18,6 +18,7 @@ public class MyScheduleThreadPool {
     public ScheduledThreadPoolExecutor scheduledThreadPoolExecutor(){
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
         executor.setMaximumPoolSize(10);
+        //executor.setKeepAliveTime();
         return executor;
     }
 }

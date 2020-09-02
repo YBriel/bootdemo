@@ -26,7 +26,7 @@ import java.security.cert.X509Certificate;
 @Configuration
 public class MyRedisTemplate {
 
-    @Bean
+    /*@Bean
     @LoadBalanced
     public RestTemplate restTemplate() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
@@ -62,9 +62,15 @@ public class MyRedisTemplate {
         //处理中文乱码
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         return restTemplate;
-    }
-   // @Bean
+    }*/
+    //@Bean
     public StringRedisTemplate redisTemplate(){
         return new StringRedisTemplate();
+    }
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate template(){
+        return new RestTemplate();
     }
 }

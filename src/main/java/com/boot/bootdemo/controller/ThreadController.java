@@ -53,6 +53,11 @@ public class ThreadController {
     @Transactional
     public String test1(int i){
         log.info("请求进来了{}",new Date());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Student stu = studentMapper.getStu(i);
         int age = stu.getAge();
         stu.setAge(age+1);

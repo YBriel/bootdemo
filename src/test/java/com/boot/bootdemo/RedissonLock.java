@@ -73,4 +73,10 @@ public class RedissonLock {
         }, "222").start();*/
     }
 
+    @Test
+    public void test2(){
+        //redissonClient.getScoredSortedSet(DistributeConstants.redisPrefix.INSTANT_CAR_DISTRIBUTE_ORDER).add(100, json);
+        redissonClient.getScoredSortedSet("dsad").remove("sdsd");
+    }
+
 }

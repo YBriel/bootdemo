@@ -1,5 +1,6 @@
 package com.boot.bootdemo.controller;
 
+import com.boot.bootdemo.service.BootdDemoService;
 import com.boot.bootdemo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * author: yuzq
  * create: 2020-08-31 10:39
  **/
-@RestController
+//@RestController
 public class TestNacosController {
 
     @Autowired
@@ -22,9 +23,18 @@ public class TestNacosController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private BootdDemoService demoService;
+
+
     @RequestMapping("testNacos")
     public String test(){
         return memberService.test();
+    }
+
+    @RequestMapping("testJeecg")
+    public String test11(){
+        return demoService.testNacos();
     }
 
     @RequestMapping("test111h")

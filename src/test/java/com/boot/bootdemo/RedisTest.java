@@ -164,4 +164,5 @@ public class RedisTest {
         System.out.println(yongyou);*/
         redisson.shutdown();
     }
+
 }

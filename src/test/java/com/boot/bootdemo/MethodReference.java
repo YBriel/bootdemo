@@ -1,3 +1,4 @@
+/*
 package com.boot.bootdemo;
 
 import com.boot.bootdemo.entity.Student;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 
+*/
 /**
  * 方法引用
  * <p>
@@ -17,7 +19,8 @@ import static java.util.stream.Collectors.toList;
  *
  * @author biezhi
  * @date 2018/2/10
- */
+ *//*
+
 public class MethodReference {
 
     public static List<Integer> findNumbers(List<Integer> numbers, Predicate<Integer> filter) {
@@ -95,10 +98,12 @@ public class MethodReference {
         System.out.println(concat);
 
         Optional<List<Student>> students1 = Optional.of(students);
+*/
 /*        Optional<List<Student>> students2 = Optional.ofNullable(students);
         System.out.println(students1.isPresent());
         students2.isPresent();
-        Optional<Object> empty = Optional.empty();*/
+        Optional<Object> empty = Optional.empty();*//*
+
 
         students.forEach(dto->
                 System.out.println(dto.getAge()));
@@ -111,3 +116,4 @@ public class MethodReference {
     }
 
 }
+*/

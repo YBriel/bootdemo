@@ -26,7 +26,7 @@ spring:
 
   redis:
     host: 39.106.121.52
-    password: mz666
+    password:
     port: 6379
 #  profiles:
 #    active: dev

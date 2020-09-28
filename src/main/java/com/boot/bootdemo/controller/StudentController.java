@@ -6,6 +6,7 @@ import com.boot.bootdemo.aspect.AsyncTest;
 import com.boot.bootdemo.aspect.Dict;
 import com.boot.bootdemo.aspect.EnableAuthCheck;
 import com.boot.bootdemo.aspect.SameUrlData;
+import com.boot.bootdemo.cache.MyCacheService;
 import com.boot.bootdemo.config.MyResult;
 import com.boot.bootdemo.config.MyResultUtil;
 import com.boot.bootdemo.entity.MyStudentEntity;
@@ -51,6 +52,9 @@ public class StudentController {
 
     @Autowired
     private MyFutureTask futureTask;
+
+    @Autowired
+    private MyCacheService cacheService;
 
     @Resource
     private ThreadPoolTaskExecutor testThreadPool;
@@ -296,5 +300,10 @@ public class StudentController {
         testThreadPool.submit(new MyRunnableTest("我是名字"));
         System.out.println("这是里面的开始");
         return "success";
+    }
+
+    @RequestMapping("/testCache")
+    public String testCache(String name){
+        return cacheService.findUserById(name);
     }
 }

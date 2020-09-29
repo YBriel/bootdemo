@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 电子围栏java版
  * author: yuzq
  * create: 2020-09-28 09:57
  **/

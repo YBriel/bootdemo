@@ -12,7 +12,7 @@
     <property name="web.business.name" value="web" />
     <property name="log.charset" value="UTF-8" />
     <property name="log.maxHistory" value="30" />
-    <property name="log.pattern" value="[%-5level] %date --%thread-- [%logger:%L] %msg %n" />
+    <property name="log.pattern" value="[%-5level] [%date{yyyy-MM-dd HH:mm:ss SSS}] --%thread-- [%logger:%L] %msg %n" />
     <property name="log.error.log.level" value="ERROR" />
     <property name="log.info.log.level" value="INFO" />
     <property name="log.async.queue.size" value="1024" />

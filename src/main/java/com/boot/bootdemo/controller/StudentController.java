@@ -15,6 +15,7 @@ import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.MyFutureTask;
 import com.boot.bootdemo.service.MyRunnableTest;
 import com.boot.bootdemo.service.StudentService;
+import com.boot.bootdemo.util.Base64ToPdf;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -129,6 +133,8 @@ public class StudentController {
     @RequestMapping("/insertStu")
     public boolean insertStu(int id){
         MyStudentEntity stu=new MyStudentEntity(id,"tom",33);
+        MyStudentEntity myStudentEntity = stu.queryStudentById(id);
+        MyStudentEntity myStudentEntity1 = stu.selectById(id);
         return stu.insert();
         //List<Student> list1 = studentService.list(new LambdaQueryWrapper<>(new Student()).);
     }
@@ -305,5 +311,22 @@ public class StudentController {
     @RequestMapping("/testCache")
     public String testCache(String name){
         return cacheService.findUserById(name);
+    }
+
+    @RequestMapping("/uploadMethodStr")
+    public String uploadMethod(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                BASE64Encoder encoder = new BASE64Encoder();
+                // 通过base64来转化图片
+                String data = encoder.encode(file.getBytes());
+                Base64ToPdf.base64StringToPdf(data,"D:aaa.pdf");
+                System.out.println(data.length());
+                return data;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

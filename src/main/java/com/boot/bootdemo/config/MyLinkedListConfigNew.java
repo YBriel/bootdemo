@@ -50,7 +50,7 @@ public class MyLinkedListConfigNew implements Runnable {
                 log.info("queue size empty success");
                 log.info("the queue size after is {}", linkedListDemo.blockingQueue.size());
             }
-            log.info("我是是是");
+            log.info("陶子凡是傻逼");
     }
 
     @PostConstruct

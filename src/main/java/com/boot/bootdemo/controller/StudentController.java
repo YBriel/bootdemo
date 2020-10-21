@@ -207,17 +207,19 @@ public class StudentController {
     }
 
     @RequestMapping("/querySt")
+    @EnableAuthCheck
     public Student querySt(Student student){
         return student;
     }
 
-    @EnableAuthCheck
+  //  @EnableAuthCheck
     @RequestMapping("/queryStu")
     //@Dict
     public MyResult<Student> queryStu(String name, Integer age){
+        System.out.println(name+"---"+age);
        /* Student student = studentService.queryStu(name,age);
         return MyResultUtil.succ(student);*/
-       return MyResultUtil.succ(new Student());
+       return MyResultUtil.succ(new Student(name,age));
     }
 
     @RequestMapping("/updStuById")

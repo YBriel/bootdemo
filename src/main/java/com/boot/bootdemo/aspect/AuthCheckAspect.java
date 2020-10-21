@@ -59,13 +59,13 @@ public class AuthCheckAspect {
 
 
     @AfterReturning(value = "pointCut()",returning = "obj")
-    public void afterReturning(JoinPoint joinPoint, Object obj) throws InterruptedException {
+    public void afterReturning(JoinPoint joinPoint, Object obj) throws Exception {
         System.out.println("afterReturning... "+"切面执行returning");
         asyncTask.test();
         System.out.println(JSON.toJSONString(obj));
     }
 
-    @Around("pointCut()")
+   // @Around("pointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("切面around开始");
         System.out.println("around... "+System.currentTimeMillis());
@@ -76,13 +76,13 @@ public class AuthCheckAspect {
         return proceed;
     }
 
-    @After("pointCut()")
+    //@After("pointCut()")
     public void afterAuth()throws Throwable{
         System.out.println(System.currentTimeMillis());
         System.out.println("切点 After 开始执行");
     }
 
-    @AfterThrowing("pointCut()")
+    //@AfterThrowing("pointCut()")
     public void exceptionAuth(){
         System.out.println("切点 exceptionAuth 开始执行");
     }

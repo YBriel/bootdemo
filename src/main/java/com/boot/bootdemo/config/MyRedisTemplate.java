@@ -3,6 +3,7 @@ package com.boot.bootdemo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -57,6 +58,11 @@ public class MyRedisTemplate {
 
     @Bean
     public RestTemplate template(){
+        RestTemplate restTemplate = new RestTemplate();
+        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory=new SimpleClientHttpRequestFactory();
+        simpleClientHttpRequestFactory.setConnectTimeout(500);
+        simpleClientHttpRequestFactory.setReadTimeout(500);
+        restTemplate.setRequestFactory(simpleClientHttpRequestFactory);
         return new RestTemplate();
     }
 }

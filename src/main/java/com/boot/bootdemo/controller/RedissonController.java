@@ -120,4 +120,25 @@ public class RedissonController {
         }
     }
 
+    @RequestMapping("/testRelease")
+    public String  test(String lock){
+        RLock lock1 = redissonClient.getLock(lock);
+        while (lock1.isLocked()){
+            System.out.println("sss");
+            return "sss";
+        }
+        if(lock1.isLocked()){
+            System.out.println("被锁住了");
+            return "被锁住了...";
+        }else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("success");
+           // lock1.unlock();
+            return "成功l";
+        }
+    }
 }

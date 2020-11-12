@@ -15,8 +15,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * author: yuzq
@@ -50,29 +52,36 @@ public class RestTemplateTest {
     }
     @Test
     public void test3(){
-        HttpHeaders headers = new HttpHeaders();
-        HttpMethod method = HttpMethod.POST;
-        // 以表单的方式提交
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        //将请求头部和参数合成一个请求  0e4ef6f9b027899a
-        List<String> cookies =new ArrayList<>();
-        cookies.add("route=dd60e19907652cdfc611cebdb619b76d;");
-        cookies.add("TLKGUID=a5a38356-bc60-4522-8826-d8acb3cb0088;");
-        cookies.add("Hm_lvt_422ba0de315b8a1aa8fcc86117369718=1605183563;");
-        cookies.add("Hm_lpvt_422ba0de315b8a1aa8fcc86117369718=1605183565;");
-        cookies.add("Hm_lpvt_422ba0de315b8a1aa8fcc86117369718=1605183565;");
-        cookies.add("JSESSIONID=3191EF76A4C8FD8436FB0298FA98BF7F-n1");
-        headers.put(HttpHeaders.COOKIE,cookies);
-        template.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        MultiValueMap<String, String> params =new LinkedMultiValueMap<>();
-        params.add("code","12313");
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
-        String stringResponseEntity = template.postForObject("http://www.tlkg.com/mobileWeb/vip/getActivationCode.kg", requestEntity, String.class);
-        byte[] bytes = stringResponseEntity.getBytes();
-        String s = new String(bytes, Charset.defaultCharset());
-        System.out.println(s);
-        ResponseEntity<String> stringResponseEntity1 = template.postForEntity("http://www.tlkg.com/mobileWeb/vip/getActivationCode.kg", requestEntity, String.class);
 
-        System.out.println(stringResponseEntity);
+        for (int i = 0; i < 100; i++) {
+            HttpHeaders headers = new HttpHeaders();
+            HttpMethod method = HttpMethod.POST;
+            // 以表单的方式提交
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            //将请求头部和参数合成一个请求  0e4ef6f9b027899a
+            List<String> cookies =new ArrayList<>();
+            cookies.add("route=dd60e19907652cdfc611cebdb619b76d;");
+            cookies.add("TLKGUID=a5a38356-bc60-4522-8826-d8acb3cb0088;");
+            cookies.add("Hm_lvt_422ba0de315b8a1aa8fcc86117369718=1605183563;");
+            cookies.add("Hm_lpvt_422ba0de315b8a1aa8fcc86117369718=1605183565;");
+            cookies.add("Hm_lpvt_422ba0de315b8a1aa8fcc86117369718=1605183565;");
+            cookies.add("JSESSIONID=3191EF76A4C8FD8436FB0298FA98BF7F-n1");
+            headers.put(HttpHeaders.COOKIE,cookies);
+            template.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
+            MultiValueMap<String, String> params =new LinkedMultiValueMap<>();
+            params.add("code", RandomTest.getGUID());
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+            TianBack stringResponseEntity = template.postForObject("http://www.tlkg.com/mobileWeb/vip/getActivationCode.kg", requestEntity, TianBack.class);
+
+            System.out.println(JSONObject.toJSONString(stringResponseEntity));
+        }
+
+//        ResponseEntity<String> stringResponseEntity1 = template.postForEntity("http://www.tlkg.com/mobileWeb/vip/getActivationCode.kg", requestEntity, String.class);
+
+       // System.out.println(stringResponseEntity);
     }
+
+
+
+
 }

@@ -54,7 +54,7 @@ public class RestTemplateTest {
         HttpMethod method = HttpMethod.POST;
         // 以表单的方式提交
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        //将请求头部和参数合成一个请求
+        //将请求头部和参数合成一个请求  0e4ef6f9b027899a
         List<String> cookies =new ArrayList<>();
         cookies.add("route=dd60e19907652cdfc611cebdb619b76d;");
         cookies.add("TLKGUID=a5a38356-bc60-4522-8826-d8acb3cb0088;");

@@ -246,6 +246,11 @@ public class StudentController {
     @RequestMapping("/testException1")
     public String testException1(){
         Student student=new Student();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //String[] split = student.getName().split(",");
 /*        if(StringUtils.isEmpty(student.getName())){
            try {

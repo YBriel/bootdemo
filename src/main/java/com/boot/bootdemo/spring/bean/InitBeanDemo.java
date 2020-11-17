@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
  * create: 2020-10-03 08:51
  **/
 public class InitBeanDemo implements InitializingBean {
+
     @Override
     public void afterPropertiesSet() throws Exception {
 

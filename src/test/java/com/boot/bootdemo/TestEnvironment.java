@@ -17,7 +17,9 @@ public class TestEnvironment {
         String property = System.getProperty("driver");
         System.out.println(property);*/
         String driver = UtilProperty.getProperties("name");
+        String driver1 = UtilProperty.getProperties("my.name");
 
         System.out.println(driver);
+        System.out.println(driver1);
     }
 }

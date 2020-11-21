@@ -1,15 +1,13 @@
 package com.boot.bootdemo.config;
 
-import com.boot.bootdemo.value.Value;
-import lombok.Data;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
  * author: yuzq
  * create: 2020-11-17 16:27
  **/
-@Configuration
+@Component
 public class TestConfig {
 
     @Value("${my.name}")

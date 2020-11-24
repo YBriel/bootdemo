@@ -16,9 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * author: yuzq
@@ -81,7 +79,44 @@ public class RestTemplateTest {
        // System.out.println(stringResponseEntity);
     }
 
+/*
+ 带参数
+ public static String buildParam(String content){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String encryptKey = "C80A148A60554F4CB40A71A4C58820B9";
+       // String nonce = MD5encryption(content);
+        String now=String.valueOf(System.currentTimeMillis()/1000);
+        //String checksum = encode(encryptKey, nonce, now);
+        HttpEntity<String> request = new HttpEntity<>(content, headers);
+        Map<String,String> params=new HashMap<>();
+        String s1 = String.valueOf(new Date().getTime() / 1000);
+        params.put("appKey","566afe8dbede1b2aa74ef7e9db7b318e");
+       // params.put("checksum",checksum);
+        params.put("time",s1);
+     //   String s = restTemplate.postForObject("https://qiyukf.com/openapi/ic/task/add?appKey={appKey}&checksum={checksum}&time={time}", request, String.class,params);
+      //  log.info("调用七鱼checksum{}time{}body{}返回信息{}",checksum,s1,content,s);
+        return  s;
+    }*/
 
+
+/*
+    传数组
+   public static void listCurrentPos(List<PageDevice> data){
+        String url="https://yhbb.hp888.com/open-api-test/devicestatus/listCurrentPos?deviceIds={deviceIds}";
+        HttpHeaders httpHeaders=new HttpHeaders();
+        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        httpHeaders.add("Authorization","Bearer "+token);
+        String[] strings = data.stream().map(PageDevice::getId).toArray(String[]::new);
+        // params.put("deviceIds", Arrays.toString(strings));
+
+        Map<String,String> params1=new HashMap<>();
+        params1.put("deviceIds",Arrays.toString(strings));
+        HttpEntity<String> request = new HttpEntity<>(null, httpHeaders);
+        String  postForObject = restTemplate.postForObject(url,request, String.class,params1);
+        System.out.println(postForObject.length());
+
+    }*/
 
 
 }

@@ -40,15 +40,21 @@ public class Son extends Parent implements Comparable<Son>{
 
     public static void main(String[] args) {
 
-        Son s=new Son("1",22,"23");
+/*        Son s=new Son("1",22,"23");
         Son s1=new Son("2",212,"213");
 
         List<Son> list =new ArrayList<>();
         list.add(s);
         list.add(s1);
         Collections.sort(list);
-        System.out.println(list);
+        System.out.println(list);*/
+
        // list.sort();
+
+        Parent parent=new Son();
+        Son s=new Son();
+        s=(Son)parent;
+       // Son parent1= (Son) new Parent();
     }
 
     @Override

@@ -25,14 +25,28 @@ public class FutureTaskImpl implements MyFutureTask {
         FutureTask<String> stringFutureTask=new FutureTask<>(new Callable<String>() {
             @Override
             public String call() throws Exception {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return "哈哈哈哈哈";
             }
         });
-        return stringFutureTask.get(1000, TimeUnit.MILLISECONDS);
+
+        new Thread(stringFutureTask).start();
+        try {
+           return stringFutureTask.get(1000, TimeUnit.MILLISECONDS);
+        }catch (TimeoutException e){
+            log.info("捕获到了超时1秒异常{}",e.getMessage());
+        }
+        return "";
     }
 
     public String futureTaskDemo() {
         FutureTask<String> stringFutureTask=new FutureTask<>(() -> "哈哈哈哈哈");
+        new Thread(stringFutureTask).start();
+
         try {
             return stringFutureTask.get(1000,TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {

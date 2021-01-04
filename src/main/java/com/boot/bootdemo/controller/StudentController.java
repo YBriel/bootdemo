@@ -273,7 +273,11 @@ public class StudentController {
 
     @RequestMapping("/futureTask")
     public String futureTask() throws InterruptedException, ExecutionException, TimeoutException {
-        return futureTask.futureTask();
+        String s = futureTask.futureTask();
+        if(StringUtils.isEmpty(s)){
+            return "ssssss";
+        }
+        return s;
     }
 
     @RequestMapping("/futureTaskDe")

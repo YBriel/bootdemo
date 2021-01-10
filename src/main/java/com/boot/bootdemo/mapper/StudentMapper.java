@@ -2,6 +2,7 @@ package com.boot.bootdemo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.boot.bootdemo.entity.Student;
+import com.boot.bootdemo.entity.TaskEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Results;
@@ -26,6 +27,8 @@ public interface StudentMapper extends BaseMapper<Student> {
     Student getStu(int id);
 
 
+    @Select("select * from sys_task")
+    List<TaskEntity> queryAllTask();
     //in 一个list查询 使用$符号用作变量
 /*    @Results
     @Select("SELECT * FROM order_table WHERE driver_id=#{driverId} and order_status = #{orderStatus} AND type IN (${type}) AND state = 1 ")

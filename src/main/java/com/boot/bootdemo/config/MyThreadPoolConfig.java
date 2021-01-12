@@ -7,6 +7,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -17,6 +18,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 @Component
 public class MyThreadPoolConfig {
+
+/*    @Bean
+    public ScheduledThreadPoolExecutor scheduledThreadPoolExecutor(){
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
+        executor.setMaximumPoolSize(10);
+        //executor.setKeepAliveTime();
+        return executor;
+    }*/
 
     @Bean(name = "testThreadPool")
     public Executor testThreadPool() {

@@ -1,18 +1,25 @@
 package com.boot.bootdemo.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.boot.bootdemo.exception.MyTimeOutException;
 import com.boot.bootdemo.exception.TokenException;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.concurrent.*;
 
 /**
  * Author： yuzq
@@ -28,6 +35,9 @@ public class AuthCheckAspect {
 
     @Autowired
     private AsyncTask asyncTask;
+
+    @Resource
+    private ThreadPoolTaskExecutor testThreadPool;
 
 
     @Pointcut("@annotation(EnableAuthCheck)")
@@ -65,15 +75,31 @@ public class AuthCheckAspect {
         System.out.println(JSON.toJSONString(obj));
     }
 
-   // @Around("pointCut()")
+    @Around("pointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("切面around开始");
+/*        System.out.println("切面around开始");
         System.out.println("around... "+System.currentTimeMillis());
         Object[] args = joinPoint.getArgs();
         Object proceed = joinPoint.proceed(args);
         System.out.println("around... "+System.currentTimeMillis());
-        System.out.println("切面around结束");
-        return proceed;
+        System.out.println("切面around结束");*/
+        Signature signature = joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        Method method = methodSignature.getMethod();
+        EnableAuthCheck authCheck = method.getAnnotation(EnableAuthCheck.class);
+        String s = authCheck.userName();
+        Future<Object> submit = testThreadPool.submit(() -> {
+            try {
+                return joinPoint.proceed(joinPoint.getArgs());
+            } catch (Throwable throwable) {
+               throw new MyTimeOutException("这个执行超时了");
+            }
+        });
+        try {
+            return  submit.get(Long.parseLong(s), TimeUnit.MILLISECONDS);
+        }catch (TimeoutException e){
+            throw new MyTimeOutException("这个执行超时了");
+        }
     }
 
     //@After("pointCut()")

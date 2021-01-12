@@ -207,8 +207,13 @@ public class StudentController {
     }
 
     @RequestMapping("/querySt")
-    @EnableAuthCheck
+    @EnableAuthCheck(userName = "200")
     public Student querySt(Student student){
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return student;
     }
 

@@ -23,7 +23,7 @@ public class QuartzConfigration {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         try {
             schedulerFactoryBean.setOverwriteExistingJobs(true);
-            schedulerFactoryBean.setQuartzProperties(quartzProperties());
+            //schedulerFactoryBean.setQuartzProperties(quartzProperties());
             schedulerFactoryBean.setJobFactory(jobFactory);
         } catch (Exception e) {
             e.printStackTrace();

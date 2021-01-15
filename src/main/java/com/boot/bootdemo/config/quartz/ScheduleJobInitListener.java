@@ -23,7 +23,7 @@ public class ScheduleJobInitListener implements CommandLineRunner {
         try {
             List<TaskEntity> taskEntities = scheduleJobService.queryAllTask();
             for (TaskEntity task : taskEntities) {
-                if ("1".equals(task.getJobStatus())) {
+                if ("2".equals(task.getJobStatus())) {
                     quartzManager.addJob(task);
                 }
             }

@@ -16,6 +16,7 @@ import com.boot.bootdemo.service.MyFutureTask;
 import com.boot.bootdemo.service.MyRunnableTest;
 import com.boot.bootdemo.service.StudentService;
 import com.boot.bootdemo.util.Base64ToPdf;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.result.DefaultResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ import java.util.concurrent.TimeoutException;
  * Date: 2020/4/11   20:04
  */
 @RestController
+@Slf4j
 public class StudentController {
 
     @Resource
@@ -344,5 +346,50 @@ public class StudentController {
             }
         }
         return null;
+    }
+
+    @RequestMapping("/testSubmit")
+    public String test111(){
+        return futureTask.test111();
+    }
+
+
+    @RequestMapping("/testThread")
+    public String test1111(){
+        return futureTask.test1111();
+    }
+    @RequestMapping("/blockedTest")
+    public void blockedTest() throws InterruptedException {
+
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                testMethod();
+            }
+        }, "a");
+
+        Thread b = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                testMethod();
+            }
+        }, "b");
+
+        a.start();
+        //Thread.sleep(1000L);
+        b.start();
+        System.out.println(a.getName() + ":" + a.getState()); // 输出？
+        System.out.println(b.getName() + ":" + b.getState()); // 输出？
+    }
+
+    private synchronized void testMethod() {
+        try {
+            log.info("开始执行");
+            System.out.println("哈哈哈哈");
+            Thread.sleep(2000L);
+            log.info("开始执行");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

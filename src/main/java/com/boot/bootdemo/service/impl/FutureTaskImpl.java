@@ -179,4 +179,31 @@ public class FutureTaskImpl implements MyFutureTask {
         }
         return "超时了";
     }
+
+    public String test111(){
+        testThreadPool.submit(()->{
+            try {
+                System.out.println("3秒开始");
+                Thread.sleep(3000);
+                System.out.println("3秒结束");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        return "success";
+    }
+
+    public String test1111(){
+        new Thread(()->{
+            System.out.println("3秒开始");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("3秒结束");
+        }).start();
+        return "success";
+    }
+
 }

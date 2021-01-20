@@ -19,6 +19,7 @@ public class TestLock {
                 testMethod();
             }
         }, "a");
+
         Thread b = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -27,7 +28,7 @@ public class TestLock {
         }, "b");
 
         a.start();
-        Thread.sleep(1000L);
+        //Thread.sleep(1000L);
         b.start();
         System.out.println(a.getName() + ":" + a.getState()); // 输出？
         System.out.println(b.getName() + ":" + b.getState()); // 输出？
@@ -36,9 +37,11 @@ public class TestLock {
     // 同步方法争夺锁
     private synchronized void testMethod() {
         try {
-            log.info("开始执行");
+           // System.out.println("开始执行");
+           // log.info("444");
+            System.out.println("哈哈哈哈");
             Thread.sleep(2000L);
-            log.info("开始执行");
+            System.out.println("开始执行");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package com.boot.bootdemo.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.mapper.StudentMapper;
@@ -21,20 +22,28 @@ import java.util.concurrent.*;
  */
 @Service
 @Slf4j
+@DS("slave")
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
 
     @Autowired
     private StudentMapper studentMapper;
 
 
+    @DS("salve")
+    public Student getStudent(Integer id){
+        return studentMapper.selectById(id);
+    }
 
+    @DS("salve1")
+    public Student getStudent1(Integer id){
+        return studentMapper.selectById(id);
+    }
 
     @Resource
     private ThreadPoolTaskExecutor testThreadPool;
 
 
     @Override
-
     public Student queryStu(String name,Integer age) {
         ThreadPoolExecutor threadPoolExecutor = testThreadPool.getThreadPoolExecutor();
         int activeCount = threadPoolExecutor.getActiveCount();

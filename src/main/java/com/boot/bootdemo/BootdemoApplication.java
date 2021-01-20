@@ -1,10 +1,11 @@
 package com.boot.bootdemo;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
 @EnableAsync(proxyTargetClass = true)
 //@ComponentScan(excludeFilters =@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,classes = com.yzcx.onlinecar.config.CatFilterConfigure.class)) 排除类
 

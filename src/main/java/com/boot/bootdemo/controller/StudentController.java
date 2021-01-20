@@ -382,6 +382,15 @@ public class StudentController {
         System.out.println(b.getName() + ":" + b.getState()); // 输出？
     }
 
+    @RequestMapping("getStudent1Ds")
+    public Student getStudent1(Integer id){
+        return studentService.getStudent1(id);
+    }
+
+    @RequestMapping("getStudentDs")
+    public Student getStudent(Integer id){
+        return studentService.getStudent(id);
+    }
     private synchronized void testMethod() {
         try {
             log.info("开始执行");

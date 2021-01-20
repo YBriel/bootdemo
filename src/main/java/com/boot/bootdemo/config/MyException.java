@@ -2,7 +2,7 @@ package com.boot.bootdemo.config;
 
 import com.boot.bootdemo.exception.TokenException;
 import com.boot.bootdemo.util.PrintStackTraceUtil;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+//import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class MyException {
 
-    @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
+/*    @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
     public String mySQLIntegrityConstraintViolationException(){
         return "主键重复了";
     }
@@ -25,7 +25,7 @@ public class MyException {
     @ResponseBody
     public String mySQLIntegrityConstraintViolationExcepti(){
         return "主键重复了";
-    }
+    }*/
 
     @ExceptionHandler(TokenException.class)
     @ResponseBody

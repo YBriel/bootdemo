@@ -383,6 +383,7 @@ public class StudentController {
     }
 
     @RequestMapping("getStudent1Ds")
+    @EnableAuthCheck
     public Student getStudent1(Integer id){
         return studentService.getStudent1(id);
     }
@@ -391,6 +392,7 @@ public class StudentController {
     public Student getStudent(Integer id){
         return studentService.getStudent(id);
     }
+
     private synchronized void testMethod() {
         try {
             log.info("开始执行");

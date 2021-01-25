@@ -28,12 +28,12 @@ public class Son extends Parent implements Comparable<Son>{
 
 
     public Son() {
+        super();
         System.out.println("这是空的构造函数");
     }
 
-
     public Son(String name, int age, String hobby) {
-        super(name, age);
+
         this.hobby = hobby;
         System.out.println("这是有参的构造函数");
     }
@@ -50,10 +50,10 @@ public class Son extends Parent implements Comparable<Son>{
         System.out.println(list);*/
 
        // list.sort();
-
-        Parent parent=new Son();
         Son s=new Son();
-        s=(Son)parent;
+      /*  Parent parent=new Son();
+        Son s=new Son();
+        s=(Son)parent;*/
        // Son parent1= (Son) new Parent();
     }
 

@@ -26,25 +26,25 @@ spring:
           username: wyc-test
           password: YZCX0wyc
 
-    driverClassName: com.mysql.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initialSize: 8
-      minIdle: 1
-      maxActive: 20
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x' FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      max-open-prepared-statements: 20
-      maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      use-global-data-source-stat: true
+#    driverClassName: com.mysql.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    druid:
+#      initialSize: 8
+#      minIdle: 1
+#      maxActive: 20
+#      maxWait: 60000
+#      timeBetweenEvictionRunsMillis: 60000
+#      minEvictableIdleTimeMillis: 300000
+#      validationQuery: select 'x' FROM DUAL
+#      testWhileIdle: true
+#      testOnBorrow: false
+#      testOnReturn: false
+#      poolPreparedStatements: true
+#      max-open-prepared-statements: 20
+#      maxPoolPreparedStatementPerConnectionSize: 20
+#      filters: stat
+#      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#      use-global-data-source-stat: true
 
 
 #  profiles:

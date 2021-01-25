@@ -62,6 +62,8 @@ public class MyRedisTemplate {
         SimpleClientHttpRequestFactory simpleClientHttpRequestFactory=new SimpleClientHttpRequestFactory();
         simpleClientHttpRequestFactory.setConnectTimeout(500);
         simpleClientHttpRequestFactory.setReadTimeout(500);
+       // restTemplate.getMessageConverters().add()
+        restTemplate.getInterceptors().add(new MyRestTemplateInterceptor());
         restTemplate.setRequestFactory(simpleClientHttpRequestFactory);
         return new RestTemplate();
     }

@@ -1,12 +1,18 @@
 package com.boot.bootdemo.config;
 
+import com.boot.bootdemo.exception.AuthException;
 import com.boot.bootdemo.exception.TokenException;
 import com.boot.bootdemo.util.PrintStackTraceUtil;
 //import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * author: yuzq
@@ -32,6 +38,35 @@ public class MyException {
     public String tokenException(){
         return "鉴权失败！";
     }
+
+/*    @ExceptionHandler(AuthException.class)
+    @ResponseBody
+    public String authException(HttpServletResponse response){
+        try {
+            response.sendError(403);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "鉴权失败！";
+    }*/
+
+    @ExceptionHandler(AuthException.class)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.FORBIDDEN)
+    public void authException(){
+
+    }
+
+   /* @ExceptionHandler(AuthException.class)
+    //@ResponseBody
+    public void authException(HttpServletResponse response){
+        try {
+            response.sendError(403);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
 
     @ExceptionHandler(NullPointerException.class)

@@ -2,12 +2,18 @@ package com.boot.bootdemo.controller;
 
 import com.boot.bootdemo.config.MyConfig;
 import com.boot.bootdemo.config.TestConfig;
+import com.boot.bootdemo.exception.AuthException;
 import com.boot.bootdemo.util.PropertyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -62,4 +68,21 @@ public class ConfigController {
         return config1.ageGet();
     }
 
+    @RequestMapping("getStatus")
+   // @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "请求参数异常!")
+    public String getStatus(HttpServletResponse response) throws IOException {
+       response.setStatus(403); //状态码 效果只有状态码变
+        //  response.sendError(403);//设置返回错误。没有权限
+        response.setHeader("name","tom");
+        response.setDateHeader("dat",new Date().getTime());
+        return config1.ageGet();
+    }
+
+    @RequestMapping("getStatus1")
+    public String getStatus1(Integer a){
+        if(a>2){
+            throw new AuthException("是是是");
+        }
+        return config1.ageGet();
+    }
 }

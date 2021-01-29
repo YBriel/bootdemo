@@ -15,6 +15,7 @@ import java.util.Locale;
 @Component
 public class MyViewResolver implements ViewResolver, Ordered {
 
+
     @Override
     public int getOrder() {
         return 0;

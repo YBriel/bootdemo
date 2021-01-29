@@ -12,6 +12,7 @@ import java.util.Map;
  **/
 public class MyView implements View {
 
+
     @Override
     public String getContentType() {
         return "text/html";
@@ -19,7 +20,8 @@ public class MyView implements View {
 
     @Override
     public void render(Map<String, ?> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        response.sendRedirect("http://localhost:8089/js/hello.html");
+       // response.sendRedirect("http://localhost:8089/js/hello.html");
+        response.sendRedirect("http://localhost:8089/template/hello.html");
         System.out.println("走了这个");
     }
 }

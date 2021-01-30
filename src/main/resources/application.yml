@@ -25,6 +25,8 @@ spring:
           url: jdbc:mysql://192.168.0.228:3306/shop?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
           username: wyc-test
           password: YZCX0wyc
+  profiles:
+    active: @profileActive@
 
 #    driverClassName: com.mysql.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource

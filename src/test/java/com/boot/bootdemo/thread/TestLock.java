@@ -2,6 +2,7 @@ package com.boot.bootdemo.thread;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.test.annotation.Repeat;
 
 /**
  * author: yuzq
@@ -11,6 +12,7 @@ import org.junit.Test;
 public class TestLock {
 
     @Test
+    @Repeat(20)
     public void blockedTest() throws InterruptedException {
 
         Thread a = new Thread(new Runnable() {
@@ -19,16 +21,18 @@ public class TestLock {
                 testMethod();
             }
         }, "a");
-
         Thread b = new Thread(new Runnable() {
             @Override
             public void run() {
                 testMethod();
             }
         }, "b");
-
+        log.info("当前线程{}",Thread.currentThread().getName());
         a.start();
-        //Thread.sleep(1000L);
+        a.join();
+        log.info("当前线程{}",Thread.currentThread().getName());
+       // Thread.sleep(1000L);
+      //  a.join();
         b.start();
         System.out.println(a.getName() + ":" + a.getState()); // 输出？
         System.out.println(b.getName() + ":" + b.getState()); // 输出？
@@ -36,14 +40,17 @@ public class TestLock {
 
     // 同步方法争夺锁
     private synchronized void testMethod() {
+       // log.info("当前线程{}",Thread.currentThread().getName());
         try {
-           // System.out.println("开始执行");
-           // log.info("444");
-            System.out.println("哈哈哈哈");
+     //       log.info("当前线程{}",Thread.currentThread().getName());
             Thread.sleep(2000L);
-            System.out.println("开始执行");
+            //Thread.currentThread().wait(2000);
+            Thread thread = Thread.currentThread();
+          //  log.info("当前线程{}",Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        log.info("结束执行");
     }
 }

@@ -3,6 +3,7 @@ package com.boot.bootdemo.config;
 import com.boot.bootdemo.designpattern.strategy.MyFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +20,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Component
 public class MyThreadPoolConfig {
 
-/*    @Bean
-    public ScheduledThreadPoolExecutor scheduledThreadPoolExecutor(){
+    @Bean(name = "myScheduledThreadPoolExecutor")
+    @Primary
+    public ScheduledThreadPoolExecutor myScheduledThreadPoolExecutor(){
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
         executor.setMaximumPoolSize(10);
         //executor.setKeepAliveTime();
         return executor;
-    }*/
+    }
 
     @Bean(name = "testThreadPool")
     public Executor testThreadPool() {

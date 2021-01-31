@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <MySqlDriver.version>5.1.37</MySqlDriver.version>
+        <MySqlDriver.version>8.0.16</MySqlDriver.version>
         <Druid.Version>1.1.10</Druid.Version>
         <DruidBoot.Version>1.1.14</DruidBoot.Version>
         <MybatisPlus.version>3.1.2</MybatisPlus.version>

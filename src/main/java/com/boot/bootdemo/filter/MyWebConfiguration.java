@@ -10,6 +10,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
  * Description:
  * Date: 2020/2/20   9:18
  */
-//@Configuration
+@Configuration
 public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override
@@ -47,19 +48,19 @@ public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(new MyInterceptor()).addPathPatterns("/queryStu");
+        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/queryStu");
 
-       // InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
-       // interceptor.addPathPatterns("/**");
-        //List<String> ex=new ArrayList<>();
-       // ex.add("/bootdemo/**/*");
-       // ex.add("/filter");
-//        ex.add("/bootdemo/testStu");
-//        ex.add("/testStu");
-  //      ex.add("/testStu/**");
-//        ex.add("/testStu/**/*");
-       // interceptor.excludePathPatterns(ex);
-        //registry.addInterceptor(new SameUrlDataInterceptor());
+        InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
+        interceptor.addPathPatterns("/**");
+        List<String> ex=new ArrayList<>();
+        ex.add("/bootdemo/**/*");
+        ex.add("/filter");
+        ex.add("/bootdemo/testStu");
+        ex.add("/testStu");
+        ex.add("/testStu/**");
+        ex.add("/testStu/**/*");
+        interceptor.excludePathPatterns(ex);
+        registry.addInterceptor(new SameUrlDataInterceptor());
     }
 
     @Override

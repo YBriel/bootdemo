@@ -8,8 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * author: yuzq
  * create: 2021-01-31 17:09
  **/
-@Configuration
-@ServletComponentScan(value = "com.boot.bootdemo.servlet")
+//@Configuration
+//@ServletComponentScan(value = "com.boot.bootdemo.servlet")
 public class MyWebMvcConfig implements WebMvcConfigurer {
 
 

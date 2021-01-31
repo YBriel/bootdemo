@@ -20,7 +20,7 @@ public class FilterConfig {
         FilterRegistrationBean<MyFilter> filterRegistration=new FilterRegistrationBean<>();
         filterRegistration.setFilter(new MyFilter());
         filterRegistration.addUrlPatterns("/queryStu");
-        filterRegistration.addInitParameter("ERR_URL", "储物袋");
+        filterRegistration.addInitParameter("ERR_URL", "储物袋0");
         return filterRegistration;
     }
 

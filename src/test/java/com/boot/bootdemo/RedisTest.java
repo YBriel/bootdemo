@@ -2,6 +2,7 @@ package com.boot.bootdemo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.boot.bootdemo.entity.Student;
+import io.lettuce.core.RedisClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.redisson.Redisson;
@@ -32,8 +33,11 @@ public class RedisTest {
     @Autowired
     private RedissonClient redissonClient;
 
+
     @Test
     public void testAdd(){
+
+
         RBucket<String> test = redissonClient.getBucket("test",StringCodec.INSTANCE);
         RBucket<String> bbb = redissonClient.getBucket("aaa", StringCodec.INSTANCE);
         bbb.set("ttt");

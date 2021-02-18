@@ -29,6 +29,4 @@ public class ValidateController {
         System.out.println(validateEntity);
         return validateEntity.getName();
     }
-
-
 }

@@ -1,5 +1,8 @@
 #配置数据源
 spring:
+  servlet:
+    multipart:
+      max-file-size: 6MB
   redis:
     host: 39.106.121.52
     password:
@@ -88,3 +91,7 @@ my:
   name: hhh
 
 debug: true
+logging:
+  level:
+    com: debug
+    #org: trace

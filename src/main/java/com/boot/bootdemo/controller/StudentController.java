@@ -335,12 +335,17 @@ public class StudentController {
     public String uploadMethod(@RequestParam("file") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
+                long size = file.getSize();
+                int i = 2*1024 * 1024;
+                if(size>i){
+                    return "error";
+                }
                 BASE64Encoder encoder = new BASE64Encoder();
                 // 通过base64来转化图片
-                String data = encoder.encode(file.getBytes());
-                Base64ToPdf.base64StringToPdf(data,"D:aaa.pdf");
-                System.out.println(data.length());
-                return data;
+//                String data = encoder.encode(file.getBytes());
+//                Base64ToPdf.base64StringToPdf(data,"D:aaa.pdf");
+//                System.out.println(data.length());
+                return "data";
             } catch (Exception e) {
                 e.printStackTrace();
             }

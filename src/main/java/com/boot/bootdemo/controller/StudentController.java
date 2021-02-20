@@ -340,6 +340,7 @@ public class StudentController {
                 if(size>i){
                     return "error";
                 }
+                Student student=new Student();
                 BASE64Encoder encoder = new BASE64Encoder();
                 // 通过base64来转化图片
 //                String data = encoder.encode(file.getBytes());

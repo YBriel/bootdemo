@@ -29,6 +29,12 @@ public class MapTest {
             String value = entry.getValue();
             System.out.println(key + ":" + value);
         }
+        //效率低
+        Iterator iter1 = map.keySet().iterator();
+        while (iter1.hasNext()) {
+            Object key = iter.next();
+            Object val = map.get(key);
+        }
     }
 
 }

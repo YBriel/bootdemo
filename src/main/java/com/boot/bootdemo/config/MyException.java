@@ -124,4 +124,18 @@ public class MyException {
         log.error("发送空指针异常了追溯代码为{},错误发送为{}",replace, PrintStackTraceUtil.getStackTraceInfo(ex));
         return RR.fail(MyExpEnum.SYS_ERROR.getDesc()+"错误代码为"+MyExpEnum.NULL_POINT_EXP.getCode()+"错误编号为"+replace);
     }
+
+    @ExceptionHandler(Exception.class)
+    public Result<String> exception(Exception e) {
+        String expNo = UUID.randomUUID().toString().replace("-", "");
+        log.error("系统出了异常异常编号{},信息{}", expNo,e.getMessage());
+        log.error("=============");
+        log.error(PrintStackTraceUtil.getStackTraceInfo(e));
+        Throwable cause = e.getCause();
+        String message = "系统繁忙，请稍后再试!错误编码";
+        if(cause!=null){
+            message=cause.getMessage();
+        }
+        return RR.fail(message+"错误码"+expNo);
+    }
 }

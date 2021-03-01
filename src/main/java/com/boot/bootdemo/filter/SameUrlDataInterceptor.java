@@ -32,7 +32,8 @@ public class SameUrlDataInterceptor extends HandlerInterceptorAdapter {
    */
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    LOG.info("走了这个拦截器");
+    return true;
+   /* LOG.info("走了这个拦截器");
     if (handler instanceof HandlerMethod) {
       HandlerMethod handlerMethod = (HandlerMethod) handler;
       Method method = handlerMethod.getMethod();
@@ -60,7 +61,7 @@ public class SameUrlDataInterceptor extends HandlerInterceptorAdapter {
       return true;
     } else {
       return super.preHandle(request, response, handler);
-    }
+    }*/
   }
   /**
    * 验证同一个url数据是否相同提交,相同返回true

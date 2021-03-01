@@ -15,7 +15,7 @@ import javax.validation.groups.Default;
 @RestController
 @RequestMapping("validate")
 @Slf4j
-public class ValidateController {
+public class ValidateController2 {
 
     @RequestMapping("test2")
     public String test2(@Validated({MicroBusinessGroup.class}) ValidateEntity validateEntity){

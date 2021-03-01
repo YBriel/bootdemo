@@ -95,3 +95,12 @@ logging:
   level:
     com: debug
     #org: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true

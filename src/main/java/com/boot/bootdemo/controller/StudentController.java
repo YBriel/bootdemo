@@ -333,6 +333,11 @@ public class StudentController {
 
     @RequestMapping("/uploadMethodStr")
     public String uploadMethod(@RequestParam("file") MultipartFile file) {
+        String originalFilename = file.getOriginalFilename();
+        String name = file.getName();
+        String contentType = file.getContentType();
+        long size1 = file.getSize();
+        System.out.println(size1);
         if (!file.isEmpty()) {
             try {
                 long size = file.getSize();
@@ -343,9 +348,9 @@ public class StudentController {
                 Student student=new Student();
                 BASE64Encoder encoder = new BASE64Encoder();
                 // 通过base64来转化图片
-//                String data = encoder.encode(file.getBytes());
-//                Base64ToPdf.base64StringToPdf(data,"D:aaa.pdf");
-//                System.out.println(data.length());
+                String data = encoder.encode(file.getBytes());
+                Base64ToPdf.base64StringToPdf(data,"D:aaa.pdf");
+                System.out.println(data.length());
                 return "data";
             } catch (Exception e) {
                 e.printStackTrace();

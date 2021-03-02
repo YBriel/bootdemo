@@ -30,6 +30,13 @@ spring:
           password: YZCX0wyc
   profiles:
     active: @profileActive@
+  boot:
+    admin:
+      client:
+        instance:
+          prefer-ip: true
+         # service-url: http://127.0.0.1:8080
+        url: http://localhost:8090
 
 #    driverClassName: com.mysql.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
@@ -104,3 +111,6 @@ management:
   endpoint:
     shutdown:
       enabled: true
+    health:
+      show-details: always
+

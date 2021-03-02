@@ -304,9 +304,15 @@ public class StudentController {
 
     @RequestMapping("/testWait")
     public String testWait(){
-        System.out.println("这是里面的开始");
+       log.info("这是里面的开始");
         testThreadPool.submit(new AsyncTest());
-        System.out.println("这是里面的开始");
+        log.error("这是里面的开始");
+        try {
+            int a=10/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("出问题了",e);
+        }
         return "success";
     }
 

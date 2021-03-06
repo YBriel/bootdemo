@@ -1,5 +1,6 @@
 package com.boot.bootdemo.designpattern.strategy.spring;
 
+import com.boot.bootdemo.entity.Hobby;
 import com.boot.bootdemo.entity.Student;
 import com.boot.bootdemo.spring.autowiredMap.DataServiceDemo;
 import lombok.extern.slf4j.Slf4j;
@@ -39,11 +40,14 @@ public class SaveOrderUtil implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext=applicationContext;
-        ClassPathXmlApplicationContext parentBeanFactory =(ClassPathXmlApplicationContext) applicationContext.getParentBeanFactory();
-        parentBeanFactory.getBeanFactory().registerSingleton("myBeanStu",new Student());
-        log.info("初始化完成我自己的bean{}","myBeanStu");
-        Object myBeanStu = applicationContext.getBean("myBeanStu");
+//        this.applicationContext=applicationContext;
+//        ClassPathXmlApplicationContext parentBeanFactory =(ClassPathXmlApplicationContext) applicationContext.getParentBeanFactory();
+//        parentBeanFactory.getBeanFactory().registerSingleton("myBeanStu",new Student());
+//        log.info("初始化完成我自己的bean{}","myBeanStu");
+//        Object myBeanStu = applicationContext.getBean("myBeanStu");
+        Student hello1 = applicationContext.getBean("hello1", Student.class);
+        Hobby hobby1 = applicationContext.getBean("Hobby1", Hobby.class);
+        log.info("哈哈哈");
 
     }
 }

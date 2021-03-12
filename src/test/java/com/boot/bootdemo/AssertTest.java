@@ -11,9 +11,22 @@ public class AssertTest {
 
     public static void main(String[] args) {
 
-        int i=1/0;
-        /*Integer a=11;
+        try {
+            int i=1/0;
+        }catch (Exception e){
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            for (StackTraceElement stackTraceElement : stackTrace) {
+                System.out.println(stackTraceElement.getClassName());
+                System.out.println(stackTraceElement.getFileName());
+                System.out.println(stackTraceElement.getLineNumber());
+                System.out.println(stackTraceElement.getMethodName());
+            }
+            e.printStackTrace();
+        }
+
+
+        Integer a=11;
         Assert.notNull(a,"不能为空啊");
-        System.out.println(a);*/
+        System.out.println(a);
     }
 }

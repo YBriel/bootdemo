@@ -1,5 +1,6 @@
 package com.boot.bootdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class MyStudentEntity extends Model<MyStudentEntity> {
 
     private String name;
 
+    @TableLogic
     private int age;
 
     public MyStudentEntity() {

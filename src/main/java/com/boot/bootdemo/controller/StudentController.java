@@ -11,6 +11,7 @@ import com.boot.bootdemo.config.MyResult;
 import com.boot.bootdemo.config.MyResultUtil;
 import com.boot.bootdemo.entity.MyStudentEntity;
 import com.boot.bootdemo.entity.Student;
+import com.boot.bootdemo.entity.TaskEntity;
 import com.boot.bootdemo.mapper.StudentMapper;
 import com.boot.bootdemo.service.MyFutureTask;
 import com.boot.bootdemo.service.MyRunnableTest;
@@ -38,6 +39,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 /**
  * Author： yuzq
@@ -419,5 +421,11 @@ public class StudentController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void testMap(){
+        Map<String, String> map = studentMapper.queryAllTask().stream().collect(Collectors.toMap(TaskEntity::getJobName, TaskEntity::getJobStatus));
+        //Map<String, String> map1 = studentMapper.queryAllTask().stream().collect(Collectors.toCollection());
+
     }
 }

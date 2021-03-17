@@ -4,6 +4,8 @@ import com.boot.bootdemo.exception.AuthException;
 import com.boot.bootdemo.exception.TokenException;
 import com.boot.bootdemo.util.PrintStackTraceUtil;
 //import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -116,6 +118,22 @@ public class MyException {
             }
         }
         return RR.fail(msg);
+    }
+
+    /**
+     * 用于   @DateTimeFormat(pattern = "yyyy-MM-dd") 校验
+     * @param ex 异常
+     * @return 锤子
+     */
+    @ExceptionHandler({InvalidFormatException.class})
+    public Result<String> handleConstraintViolationException(InvalidFormatException ex) {
+        Object value = ex.getValue();
+        List<JsonMappingException.Reference> path = ex.getPath();
+        String fieldName="";
+        if(path!=null && path.size()>0){
+            fieldName = path.get(0).getFieldName();
+        }
+        return RR.fail(fieldName+"格式有误"+value.toString());
     }
 
     @ExceptionHandler({NullPointerException.class})

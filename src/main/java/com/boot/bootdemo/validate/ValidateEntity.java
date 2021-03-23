@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * author: yuzq
@@ -12,13 +13,16 @@ import java.util.Date;
  **/
 @Data
 public class ValidateEntity {
-    @NotEmpty
+    @NotBlank
     private String name;
     @NotBlank
     private String name1;
 
     @NotBlank(groups = {CompanyGroup.class, MicroBusinessGroup.class})
     private String hobby;
+
+    @NotEmpty
+    private List<String> list;
 
     @Min(value = 4,groups = {CompanyGroup.class, IndividualGroup.class})
     @Digits(integer = 2,fraction = 0,message = "数字错了")

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * author: yuzq
@@ -16,6 +17,10 @@ import java.util.Map;
 public class MyConfig {
 
     private static Map<String,String> map=new HashMap<>();
+
+    public static final Map<String,String> map2=new ConcurrentHashMap<>(); //存md5和信息
+
+
 
     static {
         map.put("name","tom");
@@ -29,6 +34,7 @@ public class MyConfig {
     public static void setMap(Map<String, String> map) {
         MyConfig.map = map;
     }
+
 
 
 }

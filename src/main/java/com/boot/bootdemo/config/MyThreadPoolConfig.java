@@ -25,6 +25,7 @@ public class MyThreadPoolConfig {
     public ScheduledThreadPoolExecutor myScheduledThreadPoolExecutor(){
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
         executor.setMaximumPoolSize(10);
+        executor.setRejectedExecutionHandler(new MyRejectedExecutionHandler());
         //executor.setKeepAliveTime();
         return executor;
     }

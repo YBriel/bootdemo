@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.*;
 
@@ -53,6 +54,30 @@ public class ScheduledController {
             queue1.remove(runnable);
         }*/
         return "success";
+    }
+
+
+
+
+    @RequestMapping("getThreadPoolInfo")
+    public Map<String,Object> getThreadPoolInfo(){
+        Map<String,Object> map=new HashMap<>();
+        long taskCount = myScheduleThreadPool.getTaskCount();
+        int activeCount = myScheduleThreadPool.getActiveCount();
+        BlockingQueue<Runnable> queue = myScheduleThreadPool.getQueue();
+        int size = queue.size();
+        int maximumPoolSize = myScheduleThreadPool.getMaximumPoolSize();
+        int largestPoolSize = myScheduleThreadPool.getLargestPoolSize();
+        int corePoolSize = myScheduleThreadPool.getCorePoolSize();
+        long completedTaskCount = myScheduleThreadPool.getCompletedTaskCount();
+        map.put("taskCount",taskCount);
+        map.put("activeCount",activeCount);
+        map.put("size",size);
+        map.put("maximumPoolSize",maximumPoolSize);
+        map.put("largestPoolSize",largestPoolSize);
+        map.put("corePoolSize",corePoolSize);
+        map.put("completedTaskCount",completedTaskCount);
+        return map;
     }
 
     @RequestMapping("test2")

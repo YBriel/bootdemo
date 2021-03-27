@@ -1,5 +1,6 @@
 package com.boot.bootdemo.filter;
 
+import com.boot.bootdemo.filter.interceptor.TLSignInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -49,18 +50,19 @@ public class MyWebConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/queryStu");
+        registry.addInterceptor(new TLSignInterceptor()).addPathPatterns("/tl/test2");
 
-        InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
-        interceptor.addPathPatterns("/**");
-        List<String> ex=new ArrayList<>();
-        ex.add("/bootdemo/**/*");
-        ex.add("/filter");
-        ex.add("/bootdemo/testStu");
-        ex.add("/testStu");
-        ex.add("/testStu/**");
-        ex.add("/testStu/**/*");
-        interceptor.excludePathPatterns(ex);
-        registry.addInterceptor(new SameUrlDataInterceptor());
+//        InterceptorRegistration interceptor = registry.addInterceptor(new SameUrlDataInterceptor());
+//        interceptor.addPathPatterns("/**");
+//        List<String> ex=new ArrayList<>();
+//        ex.add("/bootdemo/**/*");
+//        ex.add("/filter");
+//        ex.add("/bootdemo/testStu");
+//        ex.add("/testStu");
+//        ex.add("/testStu/**");
+//        ex.add("/testStu/**/*");
+//        interceptor.excludePathPatterns(ex);
+//        registry.addInterceptor(new SameUrlDataInterceptor());
     }
 
     @Override

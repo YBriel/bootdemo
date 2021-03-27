@@ -1,6 +1,9 @@
 package com.boot.bootdemo.designpattern.strategy.spring;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.Resource;
 
 /**
  * author: yuzq
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class SaveMTOrder implements ISaveOrder {
 
 
+    @Resource
+    private RestTemplate httpsRest;
 
     @Override
     public String saveOrder() {

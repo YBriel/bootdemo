@@ -1,10 +1,23 @@
 package com.boot.bootdemo.config;
-
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 
 /**
  * Author： yuzq
@@ -14,8 +27,8 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class MyRedisTemplate {
 
-    /*@Bean
-    @LoadBalanced
+    @Bean(name = "httpsRest")
+  //  @LoadBalanced
     public RestTemplate restTemplate() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         sslContext.init(null, new TrustManager[]{new X509TrustManager() {
@@ -50,7 +63,7 @@ public class MyRedisTemplate {
         //处理中文乱码
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         return restTemplate;
-    }*/
+    }
     //@Bean
     public StringRedisTemplate redisTemplate(){
         return new StringRedisTemplate();

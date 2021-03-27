@@ -14,14 +14,48 @@ import java.util.Base64;
  */
 @Slf4j
 public class RequestWrapper extends HttpServletRequestWrapper {
-    private final String body;
+    private final String body1;
     
     public RequestWrapper(HttpServletRequest request) {
         /**
          * 由于继承了HttpServletRequestWrapper，HttpServletRequestWrapper又继承了ServletRequestWrapper，ServletRequestWrapper
-         * 中有一个private ServletRequest request;也就是将原来的request做了一个备份，具体读到的数据放在body中
+         * 中有一个private ServletRequest request;也就是将原来的request做了一个备份，具体读到的数据放在body1中
          */
         super(request);
+        body1 = inputStream2String(request);
+        log.info("过滤器request请求包装结果为：" + body1);
+    }
+
+    @Override
+    public ServletInputStream getInputStream() {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body1.getBytes());
+        ServletInputStream servletInputStream = new ServletInputStream() {
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+            @Override
+            public boolean isReady() {
+                return false;
+            }
+            @Override
+            public void setReadListener(ReadListener readListener) {
+            }
+            @Override
+            public int read() throws IOException {
+                return byteArrayInputStream.read();
+            }
+        };
+        return servletInputStream;
+
+    }
+
+    @Override
+    public BufferedReader getReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(this.getInputStream()));
+    }
+
+    private String inputStream2String(HttpServletRequest request){
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
         InputStream inputStream = null;
@@ -58,40 +92,10 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             }
         }
         byte[] decode2 = Base64.getDecoder().decode(stringBuilder.toString().getBytes());
-        body = new String(decode2);
-        log.info("过滤器request请求包装结果为：" + body);
-    }
-
-    @Override
-    public ServletInputStream getInputStream() throws IOException {
-        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
-        ServletInputStream servletInputStream = new ServletInputStream() {
-            @Override
-            public boolean isFinished() {
-                return false;
-            }
-            @Override
-            public boolean isReady() {
-                return false;
-            }
-            @Override
-            public void setReadListener(ReadListener readListener) {
-            }
-            @Override
-            public int read() throws IOException {
-                return byteArrayInputStream.read();
-            }
-        };
-        return servletInputStream;
-
-    }
-
-    @Override
-    public BufferedReader getReader() throws IOException {
-        return new BufferedReader(new InputStreamReader(this.getInputStream()));
+        return new String(decode2);
     }
 
     public String getBody() {
-        return this.body;
+        return this.body1;
     }
 }

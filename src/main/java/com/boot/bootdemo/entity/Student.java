@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * Author： yuzq
  * Description:
@@ -18,6 +20,7 @@ public class Student{
     private int id;
 
     @Dict(dictName = "stu" ,dictKey = "name")
+    @NotBlank
     private String name;
 
     @Dict(dictName = "stu" ,dictKey = "age")

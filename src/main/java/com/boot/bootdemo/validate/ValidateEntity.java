@@ -1,5 +1,6 @@
 package com.boot.bootdemo.validate;
 
+import com.boot.bootdemo.entity.Student;
 import lombok.Data;
 
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class ValidateEntity {
     @NotBlank
     private String name;
+
     @NotBlank
     private String name1;
 
@@ -23,6 +25,9 @@ public class ValidateEntity {
 
     @NotEmpty
     private List<String> list;
+
+    @NotEmpty
+    private List<Student> students;
 
     @Min(value = 4,groups = {CompanyGroup.class, IndividualGroup.class})
     @Digits(integer = 2,fraction = 0,message = "数字错了")

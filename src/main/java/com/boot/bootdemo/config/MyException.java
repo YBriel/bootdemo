@@ -1,12 +1,15 @@
 package com.boot.bootdemo.config;
 
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.boot.bootdemo.exception.AuthException;
 import com.boot.bootdemo.exception.TokenException;
 import com.boot.bootdemo.util.PrintStackTraceUtil;
 //import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -18,10 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
 import javax.validation.UnexpectedTypeException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -87,26 +93,26 @@ public class MyException {
         return "空指针了！";
     }*/
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+/*    @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<String> handle(MethodArgumentNotValidException e) {
         FieldError fieldError = e.getBindingResult().getFieldError();
         if (fieldError == null) {
             return RR.exp(MyExpEnum.PARAM_ERROR);
         }
         return RR.fail(fieldError.getDefaultMessage());
-    }
+    }*/
 
-    @ExceptionHandler({ConstraintViolationException.class})
+/*    @ExceptionHandler({ConstraintViolationException.class})
     public Result<String> handleConstraintViolationException(ConstraintViolationException ex) {
         return RR.fail(ex.getMessage());
-    }
+    }*/
 
-    @ExceptionHandler({UnexpectedTypeException.class})
+/*    @ExceptionHandler({UnexpectedTypeException.class})
     public Result<String> unexpectedTypeException(UnexpectedTypeException ex) {
         return RR.fail(ex.getMessage());
-    }
+    }*/
 
-    @ExceptionHandler({BindException.class})
+/*    @ExceptionHandler({BindException.class})
     public Result<String> bindException(BindException ex) {
         String msg=MyExpEnum.PARAM_ERROR.getDesc();
         if(ex!=null && ex.getFieldError()!=null){
@@ -118,14 +124,14 @@ public class MyException {
             }
         }
         return RR.fail(msg);
-    }
+    }*/
 
     /**
      * 用于   @DateTimeFormat(pattern = "yyyy-MM-dd") 校验
      * @param ex 异常
      * @return 锤子
      */
-    @ExceptionHandler({InvalidFormatException.class})
+/*    @ExceptionHandler({InvalidFormatException.class})
     public Result<String> handleConstraintViolationException(InvalidFormatException ex) {
         Object value = ex.getValue();
         List<JsonMappingException.Reference> path = ex.getPath();
@@ -134,7 +140,7 @@ public class MyException {
             fieldName = path.get(0).getFieldName();
         }
         return RR.fail(fieldName+"格式有误"+value.toString());
-    }
+    }*/
 
     @ExceptionHandler({NullPointerException.class})
     public Result<String> nullPointerException(NullPointerException ex) {
@@ -155,5 +161,69 @@ public class MyException {
             message=cause.getMessage();
         }
         return RR.fail(message+"错误码"+expNo);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result<String> handle(MethodArgumentNotValidException e) {
+        FieldError fieldError = e.getBindingResult().getFieldError();
+        if (fieldError == null) {
+            return RR.fail("参数错误");
+        }
+        return RR.fail(fieldError.getField()+" "+fieldError.getDefaultMessage());
+    }
+
+    @ExceptionHandler({ConstraintViolationException.class})
+    public Result<String> handleConstraintViolationException(ConstraintViolationException ex) {
+        Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
+
+        if(CollectionUtils.isNotEmpty(constraintViolations)){
+            ConstraintViolation<?> next = constraintViolations.iterator().next();
+            String message = next.getMessage();
+            Path propertyPath = next.getPropertyPath();
+
+            String filed = propertyPath.toString();
+            if(StringUtils.isNotEmpty(filed)){
+                filed= filed.substring(filed.lastIndexOf(".")+1);
+            }
+
+            return RR.fail(filed+" "+message);
+
+        }
+        return RR.fail(ex.getMessage());
+    }
+
+    @ExceptionHandler({InvalidFormatException.class})
+    public Result<String> handleConstraintViolationException(InvalidFormatException ex) {
+        Object value = ex.getValue();
+        List<JsonMappingException.Reference> path = ex.getPath();
+        String fieldName="";
+        if(path!=null && path.size()>0){
+            fieldName = path.get(0).getFieldName();
+        }
+        return RR.fail(fieldName+"格式有误"+value.toString());
+    }
+
+    @ExceptionHandler({UnexpectedTypeException.class})
+    public Result<String> unexpectedTypeException(UnexpectedTypeException ex) {
+        return RR.fail(ex.getMessage());
+    }
+
+    @ExceptionHandler({JsonParseException.class})
+    public Result<String> jsonParseException(JsonParseException ex) {
+        return RR.fail("json参数格式有问题，百度搜索beJson检查");
+    }
+
+    @ExceptionHandler({BindException.class})
+    public Result<String> bindException(BindException ex) {
+        String msg="参数错误";
+        if(ex!=null && ex.getFieldError()!=null){
+            BindingResult bindingResult = ex.getBindingResult();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            if(fieldErrors.size() > 0){
+                FieldError fieldError = fieldErrors.get(0);
+                msg=fieldError.getField()+" "+fieldError.getDefaultMessage();
+            }
+        }
+        return RR.fail(msg);
     }
 }

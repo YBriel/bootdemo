@@ -24,7 +24,7 @@ public class YunClient {
         YunClient.yunConfig=config;
     }
 
-    public static String request(YunRequest request) throws Exception {
+    public static String request(YunRequest request){
         Assert.notNull(yunConfig,"请先初始化配置文件...");
         Assert.notNull(request,"请求不能为空...");
         return   post(request);

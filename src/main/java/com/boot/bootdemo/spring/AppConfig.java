@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * create: 2020-06-23 17:51
  **/
 
-@ConfigurationProperties(prefix = "socketio")
+//@ConfigurationProperties(prefix = "socketio")
 public class AppConfig {
 
     private String host;

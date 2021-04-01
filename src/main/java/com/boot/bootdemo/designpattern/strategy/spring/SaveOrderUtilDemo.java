@@ -2,6 +2,7 @@ package com.boot.bootdemo.designpattern.strategy.spring;
 
 import com.boot.bootdemo.entity.Hobby;
 import com.boot.bootdemo.entity.Student;
+import com.boot.bootdemo.entity.privateConstruct.YunClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -26,11 +27,13 @@ public class SaveOrderUtilDemo implements BeanDefinitionRegistryPostProcessor {
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         registerBean(registry, "hello1", Student.class);
         registerBean(registry, "Hobby1", Hobby.class);
-        log.info("注册成功两个bean");
+        registerBean(registry, "hobby2", YunClient.class);
+        log.info("注册成功三个bean");
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        YunClient bean = beanFactory.getBean(YunClient.class);
 
     }
 

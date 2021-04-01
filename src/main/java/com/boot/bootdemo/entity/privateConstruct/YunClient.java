@@ -32,6 +32,7 @@ public class YunClient {
 
     private static String post(YunRequest request){
         log.info("请求成功");
+
         return request.getMethod();
     }
 

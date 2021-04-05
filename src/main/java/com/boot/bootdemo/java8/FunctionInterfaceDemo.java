@@ -24,6 +24,10 @@ public class FunctionInterfaceDemo {
         return studentSupplier.get();
     }
 
+    public static String genStr(Supplier<String> str){
+        return str.get();
+    }
+
 
     public static void main(String[] args) {
         log.info("=============断言============");
@@ -107,5 +111,7 @@ public class FunctionInterfaceDemo {
         log.info("提供数据之后的数据为{}", uuidGenerator.get());
 
         log.info("=============提供数据============");
+
+        String s = genStr(() -> "老王");
     }
 }

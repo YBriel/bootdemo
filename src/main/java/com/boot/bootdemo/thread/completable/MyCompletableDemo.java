@@ -56,6 +56,10 @@ public class MyCompletableDemo {
         long time2=System.currentTimeMillis();
         CompletableFuture<String> stringCompletableFuture = demo.sayHelloFuture();
         CompletableFuture<Integer> integerCompletableFuture = demo.guessFuture();
+        boolean done = CompletableFuture.allOf(stringCompletableFuture, integerCompletableFuture).isDone();
+        if(done){
+           // stringCompletableFuture.get();
+        }
         CompletableFuture.allOf(stringCompletableFuture,integerCompletableFuture).thenRun(() -> System.out.println("完成！！！！")).join();
         log.info("两步耗时{}",System.currentTimeMillis()-time2);
     }

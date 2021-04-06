@@ -39,6 +39,16 @@ public class JDistanceUtil {
         //return s/1000;
     }
 
+    public static double calculatePro(double lon1,double lat1,double lon2, double lat2) {
+        try {
+            return calculate(lon1, lat1, lon2, lat2)*1000;
+        }catch (Exception e){
+            return 0;
+        }
+
+        //return s/1000;
+    }
+
     /**
      * 计算直线距离
      * @param x 经度

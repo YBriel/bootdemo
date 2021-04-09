@@ -501,5 +501,12 @@ public class CompletableFutureTaskDemo {
     public static void main(String[] args) {
         CompletableFutureTaskDemo.runAsync();
         CompletableFutureTaskDemo.supplyAsync();
+        CompletableFuture.completedFuture(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
     }
 }

@@ -20,7 +20,7 @@ public class Student{
     private int id;
 
     @Dict(dictName = "stu" ,dictKey = "name")
-    @NotBlank
+    @NotBlank(message = "学生1名字不能为空")
     private String name;
 
     @Dict(dictName = "stu" ,dictKey = "age")

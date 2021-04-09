@@ -15,10 +15,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -34,8 +31,9 @@ import java.util.UUID;
  * author: yuzq
  * create: 2020-06-05 12:06
  **/
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
+
 public class MyException {
 
 /*    @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
@@ -50,7 +48,6 @@ public class MyException {
     }*/
 
     @ExceptionHandler(TokenException.class)
-    @ResponseBody
     public String tokenException(){
         return "鉴权失败！";
     }
@@ -67,7 +64,6 @@ public class MyException {
     }*/
 
     @ExceptionHandler(AuthException.class)
-    @ResponseBody
     @ResponseStatus(code = HttpStatus.FORBIDDEN)
     public void authException(){
 

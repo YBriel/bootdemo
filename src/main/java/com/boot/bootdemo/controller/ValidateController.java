@@ -2,6 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.boot.bootdemo.config.ValidationResult;
 import com.boot.bootdemo.config.ValidationUtil;
+import com.boot.bootdemo.entity.MyPersonDemo;
 import com.boot.bootdemo.entity.ValidateEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +29,12 @@ public class ValidateController {
         System.out.println(errorMsg);
         System.out.println(validateEntity);
         return validateEntity.getName();
+    }
+
+    @RequestMapping("/testLoop")
+    public String testLoop(@Validated @RequestBody MyPersonDemo personDemo ){
+        ValidationResult validationResult = ValidationUtil.validateEntity(personDemo);
+        return "";
+
     }
 }

@@ -2,12 +2,10 @@ package com.boot.bootdemo.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
-import org.redisson.api.GeoEntry;
-import org.redisson.api.RGeo;
-import org.redisson.api.RList;
-import org.redisson.api.RedissonClient;
+import org.redisson.api.*;
 import org.redisson.client.codec.StringCodec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +31,7 @@ public class ScheduledController {
     @Autowired
     RedissonClient redissonClient;
 
+
     @RequestMapping("test1")
     public String test1(Long time){
         RGeo<String> geo = redissonClient.getGeo("test1",StringCodec.INSTANCE);
@@ -54,6 +53,23 @@ public class ScheduledController {
             queue1.remove(runnable);
         }*/
         return "success";
+    }
+
+    private void sayHello(){
+        log.info("找司机开始....");
+        RBucket<String> loop = redissonClient.getBucket("loop", StringCodec.INSTANCE);
+        if(StringUtils.isEmpty(loop.get())){
+            log.info("没找到司机三秒后执行找司机...");
+            myScheduleThreadPool.schedule(this::sayHello,3,TimeUnit.SECONDS);
+            return;
+        }
+        log.info("任务执行完了。不执行");
+    }
+
+
+    @RequestMapping("testSubmitOrder")
+    public void testSubmitOrder(Integer age){
+        sayHello();
     }
 
 

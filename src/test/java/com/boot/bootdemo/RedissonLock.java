@@ -1,15 +1,22 @@
 package com.boot.bootdemo;
 
+import com.alibaba.fastjson.JSONObject;
+import com.boot.bootdemo.entity.Student;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.redisson.api.RBucket;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
+import org.redisson.Redisson;
+import org.redisson.api.*;
 import org.redisson.client.codec.StringCodec;
+import org.redisson.codec.JsonJacksonCodec;
+import org.redisson.codec.SmileJacksonCodec;
+import org.redisson.codec.TypedJsonJacksonCodec;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -19,12 +26,20 @@ import java.util.concurrent.TimeUnit;
  * Description:
  * Date: 2020/7/14   20:25
  */
-@SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class RedissonLock {
 
-    @Autowired
     private RedissonClient redissonClient;
+
+
+    @Before
+    public void before(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://39.106.121.52:6379").setPassword("mz777");
+        redissonClient = Redisson.create(config);
+
+    }
 
     @Test
     public void test() {
@@ -79,4 +94,27 @@ public class RedissonLock {
         redissonClient.getScoredSortedSet("dsad").remove("sdsd");
     }
 
+    @Test
+    public void testList(){
+/*        RList<String> list = redissonClient.getList("qn:pickup:order" , StringCodec.INSTANCE);
+        List<String> list1 = list.readAll();
+
+        list.removeIf(o->o.contains("1"));
+
+        System.out.println(list1.size());*/
+        RMap<String, Student> map = redissonClient.getMap("qn:pickup:order1", JsonJacksonCodec.INSTANCE);
+        map.put("test",new Student("tom",12));
+        map.put("test1",new Student("tom2",112));
+
+        Student  student = map.get("test");
+        Student student1 = map.get("test1");
+       // map.remove("test");
+        System.out.println("还好");
+
+//        boolean add = list.add("tes1");
+//        boolean ad1d = list.add("tes2");
+
+
+
+    }
 }

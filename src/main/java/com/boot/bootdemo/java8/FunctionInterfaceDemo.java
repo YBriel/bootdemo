@@ -113,5 +113,9 @@ public class FunctionInterfaceDemo {
         log.info("=============提供数据============");
 
         String s = genStr(() -> "老王");
+
+        log.info("=============BinaryOperator============");
+
+//        BinaryOperator<Student> binaryOperator=(a,b)->
     }
 }

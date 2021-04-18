@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Author： yuzq
@@ -24,6 +25,11 @@ public class Student{
     private String name;
 
     @Dict(dictName = "stu" ,dictKey = "age")
+
+    /**
+     * 年龄
+     */
+    @NotNull
     private int age;
 
     public Student() {

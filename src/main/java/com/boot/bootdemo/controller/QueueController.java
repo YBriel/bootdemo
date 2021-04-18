@@ -2,29 +2,42 @@ package com.boot.bootdemo.controller;
 
 import com.boot.bootdemo.config.MyLinkedListConfig;
 import com.boot.bootdemo.config.MyLinkedListConfigNew;
+import com.boot.bootdemo.entity.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * author: yuzq
- * create: 2020-07-30 10:03
- **/
+ *队列测试控制器
+ * @author yuzq
+ * @since 2020/4/11 19:58
+ * @apiNote extends BaseEntity<Student>
+ *
+ */
+
 @RestController
 @RequestMapping("queue")
 @Slf4j
+
 public class QueueController {
 
+    /**
+     *
+     * @param aa 入参aa
+     * @return 字符串
+     */
     @RequestMapping("/test")
-    public String test(Long aa){
+    public String test(@NotNull Long aa){
         MyLinkedListConfig.queue(aa);
         return "success";
     }
@@ -33,6 +46,28 @@ public class QueueController {
     public String testNew(Long aa){
         MyLinkedListConfigNew.queue(aa);
         return "success";
+    }
+
+
+    /**
+     * 查找学生
+     * @param student 学生
+     * @return 学生返回的
+     */
+    @RequestMapping("/student0")
+    public Student student(Student student){
+        return student;
+    }
+
+
+    /**
+     * 查找学生
+     * @param student 学生
+     * @return 学生返回的
+     */
+    @RequestMapping("/student1")
+    public Student student1(@RequestBody Student student){
+        return student;
     }
 
     @RequestMapping("/testHttp")

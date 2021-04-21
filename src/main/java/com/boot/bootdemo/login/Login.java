@@ -29,6 +29,17 @@ public class Login {
 
         System.out.println("登录成功11111");
         System.out.println("---------------"+ bean);
+        int a=10/0;
+
     }
 
+
+    public int login1( ){
+
+        System.out.println("登录成功11111");
+        System.out.println("---------------");
+        int a=10/0;
+        return 1;
+
+    }
 }

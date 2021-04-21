@@ -1,5 +1,6 @@
 package com.boot.bootdemo.controller;
 
+import com.boot.bootdemo.aspect.LogA;
 import com.boot.bootdemo.login.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,21 @@ public class LoginController extends BaseController{
         System.out.println(body);
         login.login();
     }
+
+    @RequestMapping("/login1")
+    public int login1(@RequestBody String body){
+        System.out.println(body);
+     return   login.login1();
+    }
+
+
+    @RequestMapping("/login2")
+    @LogA(title = "hhh",action = "登录")
+    public int login2( String body){
+        System.out.println(body);
+     return   login.login1();
+    }
+
 
     @RequestMapping("/testHeader")
     public void testHeaderDe(HttpServletRequest request,HttpServletResponse response){

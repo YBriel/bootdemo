@@ -2,10 +2,7 @@ package com.boot.bootdemo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.boot.bootdemo.aspect.AsyncTest;
-import com.boot.bootdemo.aspect.Dict;
-import com.boot.bootdemo.aspect.EnableAuthCheck;
-import com.boot.bootdemo.aspect.SameUrlData;
+import com.boot.bootdemo.aspect.*;
 import com.boot.bootdemo.cache.MyCacheService;
 import com.boot.bootdemo.config.MyResult;
 import com.boot.bootdemo.config.MyResultUtil;
@@ -175,6 +172,7 @@ public class StudentController {
     }
 
     @RequestMapping("/getStuLambda")
+    @LogPrint(title = "测试日志")
     public List<Student> getStuLambda(int id){
         List<Student> list = studentService.list(new LambdaQueryWrapper<Student>().gt(Student::getId, 1));
         return list;
@@ -204,7 +202,8 @@ public class StudentController {
     }
 
     @RequestMapping("/testStudentDict")
-    @Dict
+   // @Dict
+    @LogPrint(title = "测试日志")
     public Student query(String name,Integer age){
         Student student = studentService.queryStu(name,age);
         return student;
@@ -340,6 +339,7 @@ public class StudentController {
     }
 
     @RequestMapping("/uploadMethodStr")
+    @LogPrint(title = "上传文件")
     public String uploadMethod(@RequestParam("file") MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
         String name = file.getName();

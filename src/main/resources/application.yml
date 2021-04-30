@@ -5,7 +5,7 @@ spring:
       max-file-size: 6MB
   redis:
     host: 39.106.121.52
-    password:
+    password: mz777
     port: 6379
     jedis:
       pool:
@@ -35,8 +35,11 @@ spring:
       client:
         instance:
           prefer-ip: true
-         # service-url: http://127.0.0.1:8080
-        url: http://localhost:8090
+          service-url: http://127.0.0.1:8089
+        url: http://localhost:8790
+        auto-deregistration: true
+        enabled: true
+        username: mybootdemo
 
 #    driverClassName: com.mysql.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource

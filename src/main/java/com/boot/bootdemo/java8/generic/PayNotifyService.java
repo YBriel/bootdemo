@@ -22,3 +22,4 @@ public class PayNotifyService implements TLNotifyService<PayNotify> {
         String name = service1.name;
     }
 }
+

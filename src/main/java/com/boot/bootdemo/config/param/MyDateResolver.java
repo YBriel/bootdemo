@@ -14,11 +14,7 @@ public class MyDateResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        if(parameter.getParameterType().isAssignableFrom(String.class)){
-
-            return true;
-        }
-        return false;
+        return parameter.getParameterType().isAssignableFrom(String.class);
     }
 
     @Override

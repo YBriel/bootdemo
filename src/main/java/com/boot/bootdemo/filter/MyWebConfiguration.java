@@ -1,5 +1,6 @@
 package com.boot.bootdemo.filter;
 
+import com.boot.bootdemo.config.param.DateConverter;
 import com.boot.bootdemo.filter.interceptor.TLSignInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -44,6 +45,7 @@ public class MyWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new DateConverter());
 
     }
 

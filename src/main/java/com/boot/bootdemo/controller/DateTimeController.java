@@ -35,4 +35,9 @@ public class DateTimeController {
     public Date testTime(@DateTimeFormat(iso = DateTimeFormat.ISO.TIME) Date date){
         return date;
     }
+
+    @RequestMapping("testDateParam")
+    public Date testDateParam(Date date){
+        return date;
+    }
 }

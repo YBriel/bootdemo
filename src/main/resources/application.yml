@@ -11,6 +11,9 @@ spring:
       pool:
         max-active: 8
         max-idle: 2
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
   datasource:
     dynamic:
@@ -118,4 +121,7 @@ management:
       enabled: true
     health:
       show-details: always
+
+
+
 

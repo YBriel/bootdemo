@@ -12,19 +12,17 @@ import org.springframework.stereotype.Service;
  * author: yuzq
  * create: 2021-01-10 10:37
  **/
-@Service
 @Slf4j
-public class TaskService {
+public class TaskServiceCopy {
 
 
     @Retryable(value = AuthException.class,maxAttempts = 5,backoff = @Backoff(delay = 3000L, multiplier = 0))
-    public void test(Integer a){
+    public static void test(Integer a){
         if ((a>2)){
             log.info("要进行重试了...");
             throw new AuthException("重试开始");
         }
         log.info("正常进行...");
-
     }
 
     /**

@@ -1,5 +1,11 @@
 #配置数据源
 spring:
+#application.yaml
+  mqtt:
+    username: artemis_27684269_PWUQ655Y11
+    password: D2TD94591
+    url: tcp://223.82.146.66:1883
+    qos: 2
   servlet:
     multipart:
       max-file-size: 6MB
@@ -104,12 +110,12 @@ my:
   name: hhh
 
 debug: true
-logging:
-  level:
-    com: debug
+#logging:
+#  level:
+#    com: debug
     #org: trace
   #config: classpath:logback-spring-dev.xml
-  config: classpath:logback-logstash-dev.xml
+  #config: classpath:logback-logstash-dev.xml
 
 management:
   endpoints:

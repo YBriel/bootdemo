@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
- 
+
 /**
  * 发布消息的回调类
  *
@@ -37,6 +37,7 @@ public class PushCallback implements MqttCallback {
  
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         // subscribe后得到的消息会执行到这里面
+
         log.info("接收消息主题:{} QOs:{} 内容{}", topic,message.getQos(),new String(message.getPayload()));
 
     }

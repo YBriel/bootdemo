@@ -1,3 +1,27 @@
 {
-  "outPath": "D:\\files\\smart-doc"
+  "serverUrl": "http://localhost:9002",
+  "outPath": "D:\\files\\smartdoc",
+  "language":"CHINESE",
+  "createDebugPage": true,
+  "allInOne": true,
+  "showAuthor":true,
+  "displayActualType":true,
+  "projectName": "demo",
+  "packageFilters": "cn.jxtg.pay.controller.OrderController,cn.jxtg.pay.controller.OrderBackendController,cn.jxtg.pay.controller.AllinMemberController",
+  "style":"xt256",
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime":"2021-04-14 22:50",
+      "status": "create",
+      "author": "余振清",
+      "remarks": "初版"
+    }
+  ],
+  "customResponseFields": [
+    {
+      "name": "code",
+      "desc": "响应代码"
+    }
+  ]
 }

@@ -25,9 +25,7 @@ public class Generator {
      */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
+        System.out.println("请输入" + tip + "：");
         if (scanner.hasNext()) {
             String ipt = scanner.next();
             if (StringUtils.isNotEmpty(ipt)) {
@@ -55,15 +53,15 @@ public class Generator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-//        dsc.setUrl("jdbc:mysql://192.168.0.239:3306/onlinecar?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
-//        dsc.setDriverName("com.mysql.jdbc.Driver");
-//        dsc.setUsername("yzcx_dev");
-//        dsc.setPassword("yzcx123");
-
-        dsc.setUrl("jdbc:mysql://39.106.121.52:3306/jxtg_pay1?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://192.168.0.239:3306/onlinecar?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("mz666");
+        dsc.setUsername("yzcx_dev");
+        dsc.setPassword("yzcx123");
+
+//        dsc.setUrl("jdbc:mysql://39.106.121.52:3306/jxtg_pay1?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+//        dsc.setDriverName("com.mysql.jdbc.Driver");
+//        dsc.setUsername("root");
+//        dsc.setPassword("mz666");
         dsc.setTypeConvert(new MySqlTypeConvert(){
             // 自定义数据库表字段类型转换【可选】
             @Override
@@ -80,7 +78,7 @@ public class Generator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         String packgeName = scanner("包名");
-        pc.setParent("cn.jxtg.pay."+packgeName);
+        pc.setParent("com.yzcx.onlinecar.business."+packgeName);
         pc.setController("controller");
         pc.setEntity("entity" );
         pc.setService("service" );

@@ -1,5 +1,6 @@
 package com.boot.bootdemo.controller;
 
+import com.boot.bootdemo.config.redisson.RedissonPublishDemo;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -21,6 +22,9 @@ public class RedissonController {
 
     @Autowired
     private RedissonClient redissonClient;
+
+    @Autowired
+    private RedissonPublishDemo publishDemo;
 
     @RequestMapping("/testC")
     public void testC(){
@@ -140,5 +144,10 @@ public class RedissonController {
            // lock1.unlock();
             return "成功l";
         }
+    }
+
+    @RequestMapping("testPublish")
+    public void testPublish(String content){
+        publishDemo.publish(content);
     }
 }

@@ -91,7 +91,6 @@ public class FunctionInterfaceDemo {
 
 
         log.info("=============转换============");
-
         Function<Student, Person> function = fun -> new Person(fun.getName(), fun.getAge());
 
         Student funStudent = new Student("张思", 4);

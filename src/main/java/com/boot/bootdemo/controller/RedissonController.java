@@ -150,4 +150,9 @@ public class RedissonController {
     public void testPublish(String content){
         publishDemo.publish(content);
     }
+
+    @RequestMapping("delayQueue")
+    public void delayQueue(String content,long time){
+        publishDemo.delayQueue(content,time);
+    }
 }

@@ -47,9 +47,15 @@ public class RedissonPublishDemo {
         executor.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                RQueue<String> queue = redissonClient
-                        .getQueue("dest_queue1");
-                String promotionId = queue.poll();
+//                RQueue<String> queue = redissonClient
+//                        .getQueue("dest_queue1",StringCodec.INSTANCE);
+                RBlockingQueue<String> blockingQueue = redissonClient.getBlockingQueue("dest_queue1",StringCodec.INSTANCE);
+                String promotionId = null;
+                try {
+                    promotionId = blockingQueue.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 // 有促销ID，则进行起价更新
                 if (!StringUtils.isEmpty(promotionId)) {
                     log.info("延迟队列收到消息{}",promotionId);

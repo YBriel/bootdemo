@@ -109,12 +109,12 @@ yuzq:
 my:
   name: hhh
 
-debug: true
-#logging:
-#  level:
+#debug: true
+logging:
+  #level:
 #    com: debug
     #org: trace
-  #config: classpath:logback-spring-dev.xml
+  config: classpath:logback-spring-dev.xml
   #config: classpath:logback-logstash-dev.xml
 
 management:

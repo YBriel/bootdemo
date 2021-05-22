@@ -4,7 +4,9 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
@@ -12,6 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
  *
  * @author Unclue_liu
  */
+@Component
 public class ClientMQTTCopy {
 
     public static final String HOST = "tcp://223.82.146.66:1883";
@@ -23,7 +26,8 @@ public class ClientMQTTCopy {
     private String passWord = "HMS1UG6R";  //非必须
     private ScheduledExecutorService scheduler;
 
-    private void start() {
+    @PostConstruct
+    public void start() {
         try {
             // host为主机名，clientid即连接MQTT的客户端ID，一般以唯一标识符表示，MemoryPersistence设置clientid的保存形式，默认为以内存保存
             client = new MqttClient(HOST, clientid, new MemoryPersistence());

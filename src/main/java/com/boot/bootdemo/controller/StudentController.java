@@ -20,6 +20,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -210,10 +211,23 @@ public class StudentController {
     }
 
     @RequestMapping("/querySt")
-    @EnableAuthCheck(userName = "200")
+   // @EnableAuthCheck(userName = "200")
+    @LogPrint(title = "querySt",desc = "查询学生",note = "标记")
     public Student querySt(Student student){
         try {
             Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    @RequestMapping("/queryStJson")
+    // @EnableAuthCheck(userName = "200")
+    @LogPrint(title = "queryStJson",desc = "查询学生",note = "标记")
+    public Student queryStJson(@RequestBody Student student){
+        try {
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

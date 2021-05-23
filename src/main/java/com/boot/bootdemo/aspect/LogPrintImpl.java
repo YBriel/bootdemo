@@ -44,15 +44,19 @@ public class LogPrintImpl  {
         try {
 
             Map<String,Object> memberValues = (Map<String,Object>) requestField.get(h);
-            memberValues.put("requestId",System.currentTimeMillis()+"==");
+            memberValues.put("requestId",System.currentTimeMillis()+"");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         Object[] args = joinpoint.getArgs();
         String[] argNames = ((MethodSignature)joinpoint.getSignature()).getParameterNames(); // 参数名
-
-
-        log.info("请求名{}请求id{}入参{}",logPrint.title(),logPrint.requestId(),JSONObject.toJSON(args));
+        StringBuilder sb=new StringBuilder();
+        if(argNames.length>0){
+            for (int i=0;i<argNames.length;i++) {
+                sb.append(argNames[i]).append(":").append(JSONObject.toJSONString(args[i])).append(",");
+            }
+        }
+        log.info("requestId:{},title:{},desc:{},notes{},args:{}",logPrint.requestId(),logPrint.title(),logPrint.desc(),logPrint.note(),sb.toString());
     }
 
     @AfterReturning(value = "@annotation(LogPrint)",returning = "obj")
@@ -61,6 +65,6 @@ public class LogPrintImpl  {
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
         LogPrint logPrint = method.getAnnotation(LogPrint.class);
-        log.info("请求名{}请求id{}返回值为{}",logPrint.title(),logPrint.requestId(), JSONObject.toJSON(obj));
+        log.info("requestId:{},title:{},returnValue:{}",logPrint.requestId(), logPrint.title(),JSONObject.toJSON(obj));
     }
 }

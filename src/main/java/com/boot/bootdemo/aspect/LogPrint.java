@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * author: yuzq
  * create: 2021-04-28 13:09
  **/
-@Target({ElementType.METHOD,ElementType.PARAMETER,ElementType.FIELD})
+@Target({ElementType.METHOD,ElementType.PARAMETER,ElementType.FIELD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogPrint {
 

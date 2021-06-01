@@ -23,7 +23,6 @@ public class GeoTransferUtil {
 
     public static void main(String[] args) {
         System.out.println(GeoTransferUtil.toLng(42126056)+","+GeoTransferUtil.toLng(10016794));
-
         int i = (117 * 360000) + (6000) + 56;
         System.out.println(i);
     }

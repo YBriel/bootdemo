@@ -2,10 +2,8 @@ package com.boot.bootdemo.aspect;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.description.annotation.AnnotationDescription;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -22,16 +20,17 @@ import java.util.Map;
  * author: yuzq
  * create: 2021-04-28 13:10
  **/
-//@Component
-//@Aspect
+@Component
+@Aspect
 @Slf4j
-public class LogPrintImpl  {
+public class LogPrintImplPro {
 
     @Before("@annotation(LogPrint)")
     public void doBefore(JoinPoint joinpoint)   {
         Signature signature = joinpoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
+        String name = method.getName();
         LogPrint logPrint = method.getAnnotation(LogPrint.class);
         InvocationHandler h = Proxy.getInvocationHandler(logPrint);
         Field requestField = null;
@@ -49,22 +48,15 @@ public class LogPrintImpl  {
             e.printStackTrace();
         }
         Object[] args = joinpoint.getArgs();
-        String[] argNames = ((MethodSignature)joinpoint.getSignature()).getParameterNames(); // 参数名
-        StringBuilder sb=new StringBuilder();
-        if(argNames.length>0){
-            for (int i=0;i<argNames.length;i++) {
-                sb.append(argNames[i]).append(":").append(JSONObject.toJSONString(args[i])).append(",");
-            }
-        }
-        log.info("requestId:{},title:{},desc:{},notes{},args:{}",logPrint.requestId(),logPrint.title(),logPrint.desc(),logPrint.note(),sb.toString());
+        log.info("{}--->{},:{},title:{},note:{},desc{}",name,logPrint.requestId(), JSONObject.toJSON(args),logPrint.title(), logPrint.note(),logPrint.desc());
     }
 
     @AfterReturning(value = "@annotation(LogPrint)",returning = "obj")
-    public void doAfter(JoinPoint joinpoint,Object obj){
+    public void doAfter(JoinPoint joinpoint, Object obj){
         Signature signature = joinpoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
         LogPrint logPrint = method.getAnnotation(LogPrint.class);
-        log.info("requestId:{},title:{},returnValue:{}",logPrint.requestId(), logPrint.title(),JSONObject.toJSON(obj));
+        log.info("{}<---{},{}",method.getName(),logPrint.requestId(), JSONObject.toJSON(obj));
     }
 }

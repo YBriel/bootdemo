@@ -69,6 +69,10 @@ public class Generator {
                 if ( fieldType.toLowerCase().contains( "datetime" ) ) {
                     return DbColumnType.DATE;
                 }
+                String t = fieldType.toLowerCase();
+                if (t.contains("tinyint(1)")) {
+                    return DbColumnType.INTEGER;
+                }
                 return super.processTypeConvert(globalConfig, fieldType);
             }
 
@@ -131,5 +135,20 @@ public class Generator {
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
+    }
+
+
+    /**
+     * 自定义类型转换
+     */
+    static class MySqlTypeConvertCustom extends MySqlTypeConvert implements ITypeConvert{
+        @Override
+        public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+            String t = fieldType.toLowerCase();
+            if (t.contains("tinyint(1)")) {
+                return DbColumnType.INTEGER;
+            }
+            return super.processTypeConvert(globalConfig, fieldType);
+        }
     }
 }

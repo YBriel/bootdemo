@@ -1,12 +1,15 @@
 package com.boot.bootdemo.entity;
 
 import com.boot.bootdemo.aspect.Dict;
+import com.boot.bootdemo.config.serilize.MyBigDecimalSerializable;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Author： yuzq
@@ -30,7 +33,11 @@ public class Student{
      * 年龄
      */
     @NotNull
+    @JsonSerialize()
     private int age;
+
+    @JsonSerialize(using = MyBigDecimalSerializable.class)
+    public BigDecimal money;
 
     public Student() {
 

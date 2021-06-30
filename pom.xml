@@ -291,6 +291,12 @@
                     <groupId>de.codecentric</groupId>
                     <artifactId>spring-boot-admin-starter-client</artifactId>
                 </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
 	</dependencies>
 	<profiles>
 		<profile>

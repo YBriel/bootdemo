@@ -1,6 +1,7 @@
 package com.boot.bootdemo.entity.money;
 
 import com.boot.bootdemo.config.serilize.MyBigDecimalSerializable;
+import com.boot.bootdemo.config.serilize.MyIntegerSerializable;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
@@ -15,5 +16,6 @@ public class MyBigDecimalDemo {
     @JsonSerialize(using = MyBigDecimalSerializable.class,nullsUsing = MyBigDecimalSerializable.class)
     private BigDecimal money;
 
+    @JsonSerialize(using = MyIntegerSerializable.class,nullsUsing = MyIntegerSerializable.class)
     private Integer age;
 }

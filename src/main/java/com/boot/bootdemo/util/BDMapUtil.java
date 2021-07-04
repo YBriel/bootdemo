@@ -23,7 +23,8 @@ import java.util.*;
 
 //@Service
 @Slf4j
-public class BDMapUtil {
+public class
+BDMapUtil {
 
 
 //    @Resource(name = "myrest")

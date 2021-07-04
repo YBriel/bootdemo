@@ -16,7 +16,7 @@ import java.util.Objects;
 @Slf4j
 public class FileUtil {
 
-    public static File multipartFileToFile(MultipartFile file) throws Exception {
+    public static File MmultipartFileToFile(MultipartFile file) throws Exception {
 
         File toFile = null;
         if (file.getName().equals("") || file.getSize() <= 0) {

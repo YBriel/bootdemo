@@ -1,23 +1,20 @@
-/*
 package com.boot.bootdemo.controller;
 
-import com.boot.bootdemo.apollo.TestJavaConfigBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.boot.bootdemo.entity.money.MyBigDecimalDemo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 @RestController
+@RequestMapping("test")
 public class TestController {
 
-    @Autowired
-    private TestJavaConfigBean testJavaConfigBean;
 
-    @RequestMapping("get")
-    public String get(){
-        int batch = testJavaConfigBean.getBatch();
-        int timeout = testJavaConfigBean.getTimeout();
-        String mobile = testJavaConfigBean.getMobile();
-        return "batch:"+batch+", timeout:"+timeout+"mobile"+mobile;
+    @RequestMapping("queryMyBigDecimalDemo")
+    public MyBigDecimalDemo queryMyBigDecimalDemo(){
+        MyBigDecimalDemo myBigDecimalDemo = new MyBigDecimalDemo();
+       // myBigDecimalDemo.setMoney(BigDecimal.TEN);
+        return myBigDecimalDemo;
     }
-
-}*/
+}

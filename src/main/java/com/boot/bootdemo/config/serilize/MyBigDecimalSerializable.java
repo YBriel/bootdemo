@@ -23,6 +23,8 @@ public class MyBigDecimalSerializable extends JsonSerializer<BigDecimal> {
     public void serialize(BigDecimal decimal, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if (decimal != null) {
             jsonGenerator.writeString(df.format(decimal));
+        }else {
+            jsonGenerator.writeString("0.00");
         }
     }
 }

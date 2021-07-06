@@ -56,16 +56,18 @@ public class Generator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDriverName("com.mysql.jdbc.Driver");
 
-//        dsc.setUrl("jdbc:mysql://192.168.0.239:3306/onlinecar?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
-//        dsc.setUsername("yzcx_dev");
-//        dsc.setPassword("yzcx123");
+        dsc.setUrl("jdbc:mysql://192.168.0.239:3306/onlinecar?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+        dsc.setUsername("yzcx_dev");
+        dsc.setPassword("yzcx123");
+
 //        dsc.setUrl("jdbc:mysql://db.dev.tolvyo.com:3306/distribution_my?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
 //        dsc.setUsername("tolvyodev");
 //        dsc.setPassword("tolvyodev123!@#");
 
-        dsc.setUrl("jdbc:mysql://39.106.121.52:3306/jxtg_pay1?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
-        dsc.setUsername("root");
-        dsc.setPassword("mz666");
+//        dsc.setUrl("jdbc:mysql://39.106.121.52:3306/jxtg_pay1?&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
+//        dsc.setUsername("root");
+//        dsc.setPassword("mz666");
+
         dsc.setTypeConvert(new MySqlTypeConvert(){
             // 自定义数据库表字段类型转换【可选】
             @Override
@@ -92,6 +94,7 @@ public class Generator {
         pc.setService("service" );
         pc.setServiceImpl("service."+"impl");
         pc.setMapper("dao" );
+        pc.setXml("");
         mpg.setPackageInfo(pc);
 
         // 自定义配置

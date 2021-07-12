@@ -14,14 +14,14 @@ public class Sample {
     private static final Client client;
 
     static {
-        client= Sample.createClient("LTAI4GBduxgBJo3ZG1vxKhKp", "mpLKSzyxoXCQmodW22MqEXi8lKwmfl");
+        client= Sample.createClient("", "");
     }
 
     /**
      * 使用AK&SK初始化账号Client
      *
-     * @param accessKeyId     LTAI4GBduxgBJo3ZG1vxKhKp
-     * @param accessKeySecret mpLKSzyxoXCQmodW22MqEXi8lKwmfl
+     * @param accessKeyId
+     * @param accessKeySecret
      * @return Client
      */
     public static Client createClient(String accessKeyId, String accessKeySecret) {
@@ -43,7 +43,7 @@ public class Sample {
      * @return 客户端信息
      */
     public static Client genClient() {
-        return Sample.createClient("LTAI4GBduxgBJo3ZG1vxKhKp", "mpLKSzyxoXCQmodW22MqEXi8lKwmfl");
+        return Sample.createClient("", "");
     }
 
     /**

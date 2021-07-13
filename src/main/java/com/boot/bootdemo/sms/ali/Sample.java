@@ -127,7 +127,7 @@ public class Sample {
 
 
     public static void main(String[] args_) throws Exception {
-     /*   Client client = Sample.createClient("LTAI4GBduxgBJo3ZG1vxKhKp", "mpLKSzyxoXCQmodW22MqEXi8lKwmfl");
+     /*   Client client = Sample.createClient("", "");
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
                 .setPhoneNumbers("13576911130")
                 .setSignName("赣游通")

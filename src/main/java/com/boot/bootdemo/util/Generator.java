@@ -66,7 +66,6 @@ public class Generator {
                 String line = null;
                 while ((line = reader.readLine()) != null) {
                     // 将实体类中的entity变为Vo
-                    String lineString=line.toString();
                     line = line.replace("entity", "vo").replace("Entity", "Vo");
                     // 去掉mybatis-plus注解
                     if (line.contains("TableName") || line.contains("TableField") || line.contains("Accessors") || line.contains("TableId") || line.contains("IdType")) {

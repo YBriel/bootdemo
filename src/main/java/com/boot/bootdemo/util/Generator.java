@@ -2,7 +2,6 @@ package com.boot.bootdemo.util;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -12,7 +11,12 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,14 +40,111 @@ public class Generator {
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
+
+    private static void produceViewObject(String basePackage,String packageName,String type,Boolean isTablePrefix, String... tableNames) {
+        for (int i = 0; i < tableNames.length; i++) {
+            String tableName = tableNames[i];
+            tableName = isTablePrefix ? tableName.substring(tableName.indexOf("_") + 1) : tableName;
+            String outPutDir = basePackage + "\\" + (packageName.replace(".", "\\")) + "\\"+type+"\\"
+                    + "\\";
+            String baseFileName = MyStringUtil.underline2Camel(tableName, false);
+            try {
+                File outFile = new File(outPutDir);
+                if (!outFile.exists()) {
+                    outFile.mkdirs();
+                }
+                File voFile = new File(outFile, baseFileName +type +".java");
+                if (!voFile.exists()) {
+                    voFile.createNewFile();
+                }
+                BufferedReader reader = new BufferedReader(
+                        new FileReader(basePackage + "\\" + (packageName.replace(".", "\\")) + "\\entity\\"
+                                + baseFileName + ".java"));
+                FileWriter fw = new FileWriter(voFile);
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    // 将实体类中的entity变为Vo
+                    String lineString=line.toString();
+                    line = line.replace("entity", "vo").replace("Entity", "Vo");
+                    // 去掉mybatis-plus注解
+                    if (line.contains("TableName") || line.contains("TableField") || line.contains("Accessors")) {
+                        continue;
+                    }
+                    if (line.contains("TableId")) {
+                        continue;
+                    }
+                    if(line.contains(baseFileName)){
+                        line=line.replace(baseFileName,baseFileName+type);
+                    }
+                    line += "\r\n";
+                    fw.write(line);
+                }
+                fw.close();
+                reader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 根据表名生成VO对象,用于mybatis-plus代码生成以后再生成
+     */
+    private static void produceViewObject(String basePackage,String packageName,boolean isTablePrefix, String... tableNames) {
+        for (int i = 0; i < tableNames.length; i++) {
+            String tableName = tableNames[i];
+            tableName = isTablePrefix ? tableName.substring(tableName.indexOf("_") + 1) : tableName;
+            String suPkStr = StringUtils.remove(tableName, "_").toLowerCase();
+            String outPutDir = basePackage + "\\" + (packageName.replace(".", "\\")) + "\\vo\\"
+                    + "\\";
+            String baseFileName = MyStringUtil.underline2Camel(tableName, false);
+            try {
+                File outFile = new File(outPutDir);
+                if (!outFile.exists()) {
+                    outFile.mkdirs();
+                }
+                File voFile = new File(outFile, baseFileName + "Vo.java");
+                if (!voFile.exists()) {
+                    voFile.createNewFile();
+                }
+                BufferedReader reader = new BufferedReader(
+                        new FileReader(basePackage + "\\" + (packageName.replace(".", "\\")) + "\\entity\\"
+                                + baseFileName + ".java"));
+                FileWriter fw = new FileWriter(voFile);
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    // 将实体类中的entity变为Vo
+                    String lineString=line.toString();
+                    line = line.replace("entity", "vo").replace("Entity", "Vo");
+                    // 去掉mybatis-plus注解
+                    if (line.contains("TableName") || line.contains("TableField") || line.contains("Accessors")) {
+                        continue;
+                    }
+                    if (line.contains("TableId")) {
+                        continue;
+                    }
+                    if(line.contains(baseFileName)){
+                        line=line.replace(baseFileName,baseFileName+"Vo");
+                    }
+                    line += "\r\n";
+                    fw.write(line);
+                }
+                fw.close();
+                reader.close();
+            } catch (Exception e) {
+                 e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir") ;
-        gc.setOutputDir(projectPath + "/src/main/java");
+        String projectPath = System.getProperty("user.dir") + "/src/main/java";
+        gc.setOutputDir(projectPath);
         gc.setAuthor("yuzq");
         gc.setOpen(false);
         gc.setFileOverride(true);//是否覆盖文件
@@ -136,12 +237,17 @@ public class Generator {
 
         // 公共父类
         // 写于父类中的公共字段
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+
+        String[] tablesNames=scanner("表名，多个英文逗号分割").split(",");
+        strategy.setInclude(tablesNames);
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix("t_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
+
+        produceViewObject(projectPath,packageName,"Vo",false,tablesNames);
+        produceViewObject(projectPath,packageName,"Dto",false,tablesNames);
     }
 
 

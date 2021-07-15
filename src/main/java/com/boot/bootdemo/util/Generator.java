@@ -67,11 +67,12 @@ public class Generator {
                     String lineString=line.toString();
                     line = line.replace("entity", "vo").replace("Entity", "Vo");
                     // 去掉mybatis-plus注解
-                    if (line.contains("TableName") || line.contains("TableField") || line.contains("Accessors")) {
+                    if (line.contains("TableName") || line.contains("TableField") || line.contains("Accessors") || line.contains("TableId") || line.contains("IdType")) {
                         continue;
                     }
-                    if (line.contains("TableId")) {
-                        continue;
+
+                    if(line.contains("package ")){
+                        line="package "+packageName+"."+type+";";
                     }
                     if(line.contains(baseFileName)){
                         line=line.replace(baseFileName,baseFileName+type);
@@ -90,7 +91,7 @@ public class Generator {
     /**
      * 根据表名生成VO对象,用于mybatis-plus代码生成以后再生成
      */
-    private static void produceViewObject(String basePackage,String packageName,boolean isTablePrefix, String... tableNames) {
+  /*  private static void produceViewObject(String basePackage,String packageName,boolean isTablePrefix, String... tableNames) {
         for (int i = 0; i < tableNames.length; i++) {
             String tableName = tableNames[i];
             tableName = isTablePrefix ? tableName.substring(tableName.indexOf("_") + 1) : tableName;
@@ -135,7 +136,7 @@ public class Generator {
                  e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         // 代码生成器
